@@ -1,0 +1,55 @@
+{
+ "gene": "BRCA1",
+ "transcript": "ENST00000471181",
+ "protein_length": 1884,
+ "n": 3893,
+ "n_lof": 823,
+ "n_missense": 2086,
+ "variants": {
+  "quill-v": {
+   "all": 0.7717,
+   "coding": 0.7291,
+   "missense": 0.5868,
+   "noncoding": 0.8519
+  },
+  "BLOSUM62 only": {
+   "all": 0.7713,
+   "coding": 0.7243,
+   "missense": 0.5814,
+   "noncoding": 0.8519
+  },
+  "BLOSUM62 + residue rules": {
+   "all": 0.7799,
+   "coding": 0.741,
+   "missense": 0.6085,
+   "noncoding": 0.8519
+  },
+  "BLOSUM62 + conservation": {
+   "all": 0.7626,
+   "coding": 0.7107,
+   "missense": 0.5559,
+   "noncoding": 0.8519
+  },
+  "tiers only": {
+   "all": 0.7293,
+   "coding": 0.6488,
+   "missense": 0.4587,
+   "noncoding": 0.8519
+  },
+  "CADD": {
+   "all": 0.8041,
+   "coding": 0.8408,
+   "missense": 0.7382,
+   "noncoding": 0.8754
+  },
+  "phyloP (mammalian)": {
+   "all": 0.7808,
+   "coding": 0.7361,
+   "missense": 0.7243,
+   "noncoding": 0.8873
+  }
+ },
+ "consequence_agreement": 0.9979,
+ "residues_with_homologue_cover": 0.4523,
+ "homologues_aligned": 139
+}

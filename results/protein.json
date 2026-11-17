@@ -1,0 +1,100 @@
+{
+ "signal_peptide -> extracellular region": {
+  "auroc": 0.6681,
+  "positives": 878,
+  "n": 3719,
+  "fires_on": 705,
+  "precision_when_fires": 0.556,
+  "base_rate": 0.2361
+ },
+ "tm_any -> membrane": {
+  "auroc": 0.7217,
+  "positives": 1694,
+  "n": 3719
+ },
+ "tm_multi -> plasma membrane": {
+  "auroc": 0.6926,
+  "positives": 913,
+  "n": 3719
+ },
+ "mito_presequence -> mitochondrion": {
+  "auroc": 0.6527,
+  "positives": 306,
+  "n": 3719
+ },
+ "nls -> nucleus": {
+  "auroc": 0.6133,
+  "positives": 1494,
+  "n": 3719
+ },
+ "gpi_anchor -> plasma membrane": {
+  "auroc": 0.5116,
+  "positives": 913,
+  "n": 3719,
+  "fires_on": 65,
+  "precision_when_fires": 0.4923,
+  "base_rate": 0.2455
+ },
+ "gpi_anchor -> cell surface": {
+  "auroc": 0.5241,
+  "positives": 125,
+  "n": 3719,
+  "fires_on": 65,
+  "precision_when_fires": 0.1231,
+  "base_rate": 0.0336
+ },
+ "coiled_coil -> cytoskeleton": {
+  "auroc": 0.6063,
+  "positives": 472,
+  "n": 3719
+ },
+ "high_pI -> RNA binding": {
+  "auroc": 0.5886,
+  "positives": 326,
+  "n": 3719
+ },
+ "high_pI -> nucleus": {
+  "auroc": 0.5565,
+  "positives": 1494,
+  "n": 3719
+ },
+ "disordered -> nucleus": {
+  "auroc": 0.6856,
+  "positives": 1494,
+  "n": 3719
+ },
+ "KDEL -> endoplasmic reticulum lumen": {
+  "auroc": 0.5667,
+  "positives": 45,
+  "n": 3719,
+  "fires_on": 6,
+  "precision_when_fires": 1.0,
+  "base_rate": 0.0121
+ },
+ "KDEL -> endoplasmic reticulum": {
+  "auroc": 0.5102,
+  "positives": 294,
+  "n": 3719,
+  "fires_on": 6,
+  "precision_when_fires": 1.0,
+  "base_rate": 0.0791
+ },
+ "N_glycosylation_density -> extracellular region": {
+  "auroc": 0.5491,
+  "positives": 878,
+  "n": 3719
+ },
+ "cysteine_rich -> extracellular region": {
+  "auroc": 0.507,
+  "positives": 878,
+  "n": 3719
+ },
+ "prevalence": {
+  "signal_peptide": 0.1896,
+  "any_tm": 0.3151,
+  "mito_presequence": 0.0632,
+  "gpi_anchor": 0.0175,
+  "any_prosite": 0.3832
+ },
+ "n": 3719
+}

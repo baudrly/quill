@@ -1,0 +1,1090 @@
+{
+ "classify": {
+  "go/quill-k": {
+   "accuracy": 0.2767,
+   "balanced_accuracy": 0.2413,
+   "macro_auroc": 0.6624,
+   "per_class_recall": {
+    "ribosome_translation": 0.3175,
+    "secreted": 0.3845,
+    "integral_membrane": 0.3418,
+    "mitochondrion": 0.4054,
+    "cytoskeleton": 0.0359,
+    "nucleus_dna_binding": 0.2668,
+    "rna_binding": 0.1402,
+    "atp_binding": 0.2245,
+    "metal_ion_binding": 0.1522,
+    "cytosol_soluble": 0.1445
+   },
+   "per_class_auroc": {
+    "ribosome_translation": 0.7655,
+    "secreted": 0.6414,
+    "integral_membrane": 0.7873,
+    "mitochondrion": 0.7043,
+    "cytoskeleton": 0.5615,
+    "nucleus_dna_binding": 0.6944,
+    "rna_binding": 0.6448,
+    "atp_binding": 0.5934,
+    "metal_ion_binding": 0.6069,
+    "cytosol_soluble": 0.6247
+   },
+   "confusions": {
+    "ribosome_translation": [
+     [
+      "ribosome_translation",
+      20
+     ],
+     [
+      "atp_binding",
+      14
+     ],
+     [
+      "mitochondrion",
+      12
+     ]
+    ],
+    "secreted": [
+     [
+      "secreted",
+      343
+     ],
+     [
+      "atp_binding",
+      131
+     ],
+     [
+      "nucleus_dna_binding",
+      85
+     ]
+    ],
+    "integral_membrane": [
+     [
+      "integral_membrane",
+      255
+     ],
+     [
+      "secreted",
+      158
+     ],
+     [
+      "atp_binding",
+      69
+     ]
+    ],
+    "mitochondrion": [
+     [
+      "mitochondrion",
+      60
+     ],
+     [
+      "nucleus_dna_binding",
+      30
+     ],
+     [
+      "atp_binding",
+      15
+     ]
+    ],
+    "cytoskeleton": [
+     [
+      "nucleus_dna_binding",
+      71
+     ],
+     [
+      "secreted",
+      60
+     ],
+     [
+      "atp_binding",
+      32
+     ]
+    ],
+    "nucleus_dna_binding": [
+     [
+      "metal_ion_binding",
+      278
+     ],
+     [
+      "nucleus_dna_binding",
+      179
+     ],
+     [
+      "cytosol_soluble",
+      61
+     ]
+    ],
+    "rna_binding": [
+     [
+      "nucleus_dna_binding",
+      60
+     ],
+     [
+      "atp_binding",
+      55
+     ],
+     [
+      "ribosome_translation",
+      40
+     ]
+    ],
+    "atp_binding": [
+     [
+      "atp_binding",
+      22
+     ],
+     [
+      "metal_ion_binding",
+      21
+     ],
+     [
+      "cytosol_soluble",
+      15
+     ]
+    ],
+    "metal_ion_binding": [
+     [
+      "nucleus_dna_binding",
+      20
+     ],
+     [
+      "atp_binding",
+      16
+     ],
+     [
+      "metal_ion_binding",
+      14
+     ]
+    ],
+    "cytosol_soluble": [
+     [
+      "nucleus_dna_binding",
+      137
+     ],
+     [
+      "cytosol_soluble",
+      51
+     ],
+     [
+      "atp_binding",
+      44
+     ]
+    ]
+   },
+   "n": 3578,
+   "majority_baseline": 0.2493,
+   "parameters": 34684
+  },
+  "go/quill-s": {
+   "accuracy": 0.3737,
+   "balanced_accuracy": 0.209,
+   "macro_auroc": 0.6801,
+   "per_class_recall": {
+    "ribosome_translation": 0.0952,
+    "secreted": 0.667,
+    "integral_membrane": 0.5054,
+    "mitochondrion": 0.1689,
+    "cytoskeleton": 0.0637,
+    "nucleus_dna_binding": 0.4128,
+    "rna_binding": 0.0644,
+    "atp_binding": 0.051,
+    "metal_ion_binding": 0.0109,
+    "cytosol_soluble": 0.051
+   },
+   "per_class_auroc": {
+    "ribosome_translation": 0.7724,
+    "secreted": 0.7191,
+    "integral_membrane": 0.7418,
+    "mitochondrion": 0.7025,
+    "cytoskeleton": 0.5657,
+    "nucleus_dna_binding": 0.8197,
+    "rna_binding": 0.4951,
+    "atp_binding": 0.6968,
+    "metal_ion_binding": 0.5956,
+    "cytosol_soluble": 0.692
+   },
+   "confusions": {
+    "ribosome_translation": [
+     [
+      "secreted",
+      34
+     ],
+     [
+      "mitochondrion",
+      13
+     ],
+     [
+      "integral_membrane",
+      7
+     ]
+    ],
+    "secreted": [
+     [
+      "secreted",
+      595
+     ],
+     [
+      "integral_membrane",
+      175
+     ],
+     [
+      "mitochondrion",
+      38
+     ]
+    ],
+    "integral_membrane": [
+     [
+      "integral_membrane",
+      377
+     ],
+     [
+      "secreted",
+      280
+     ],
+     [
+      "nucleus_dna_binding",
+      29
+     ]
+    ],
+    "mitochondrion": [
+     [
+      "secreted",
+      82
+     ],
+     [
+      "mitochondrion",
+      25
+     ],
+     [
+      "integral_membrane",
+      21
+     ]
+    ],
+    "cytoskeleton": [
+     [
+      "secreted",
+      140
+     ],
+     [
+      "integral_membrane",
+      51
+     ],
+     [
+      "cytosol_soluble",
+      17
+     ]
+    ],
+    "nucleus_dna_binding": [
+     [
+      "nucleus_dna_binding",
+      277
+     ],
+     [
+      "secreted",
+      196
+     ],
+     [
+      "integral_membrane",
+      65
+     ]
+    ],
+    "rna_binding": [
+     [
+      "secreted",
+      105
+     ],
+     [
+      "integral_membrane",
+      64
+     ],
+     [
+      "mitochondrion",
+      23
+     ]
+    ],
+    "atp_binding": [
+     [
+      "secreted",
+      40
+     ],
+     [
+      "integral_membrane",
+      35
+     ],
+     [
+      "rna_binding",
+      9
+     ]
+    ],
+    "metal_ion_binding": [
+     [
+      "secreted",
+      46
+     ],
+     [
+      "integral_membrane",
+      22
+     ],
+     [
+      "mitochondrion",
+      8
+     ]
+    ],
+    "cytosol_soluble": [
+     [
+      "secreted",
+      170
+     ],
+     [
+      "integral_membrane",
+      76
+     ],
+     [
+      "mitochondrion",
+      30
+     ]
+    ]
+   },
+   "n": 3578,
+   "majority_baseline": 0.2493,
+   "parameters": 34684
+  },
+  "go/quill-k-composition-only": {
+   "accuracy": 0.3021,
+   "balanced_accuracy": 0.2521,
+   "macro_auroc": 0.667,
+   "per_class_recall": {
+    "ribosome_translation": 0.3016,
+    "secreted": 0.3913,
+    "integral_membrane": 0.4705,
+    "mitochondrion": 0.4054,
+    "cytoskeleton": 0.0359,
+    "nucleus_dna_binding": 0.2653,
+    "rna_binding": 0.1364,
+    "atp_binding": 0.2245,
+    "metal_ion_binding": 0.1739,
+    "cytosol_soluble": 0.1161
+   },
+   "per_class_auroc": {
+    "ribosome_translation": 0.7505,
+    "secreted": 0.6529,
+    "integral_membrane": 0.8052,
+    "mitochondrion": 0.6948,
+    "cytoskeleton": 0.5599,
+    "nucleus_dna_binding": 0.7196,
+    "rna_binding": 0.6501,
+    "atp_binding": 0.5889,
+    "metal_ion_binding": 0.628,
+    "cytosol_soluble": 0.6199
+   },
+   "confusions": {
+    "ribosome_translation": [
+     [
+      "ribosome_translation",
+      19
+     ],
+     [
+      "atp_binding",
+      13
+     ],
+     [
+      "mitochondrion",
+      12
+     ]
+    ],
+    "secreted": [
+     [
+      "secreted",
+      349
+     ],
+     [
+      "atp_binding",
+      121
+     ],
+     [
+      "integral_membrane",
+      89
+     ]
+    ],
+    "integral_membrane": [
+     [
+      "integral_membrane",
+      351
+     ],
+     [
+      "secreted",
+      126
+     ],
+     [
+      "mitochondrion",
+      68
+     ]
+    ],
+    "mitochondrion": [
+     [
+      "mitochondrion",
+      60
+     ],
+     [
+      "nucleus_dna_binding",
+      29
+     ],
+     [
+      "ribosome_translation",
+      13
+     ]
+    ],
+    "cytoskeleton": [
+     [
+      "nucleus_dna_binding",
+      71
+     ],
+     [
+      "secreted",
+      62
+     ],
+     [
+      "atp_binding",
+      28
+     ]
+    ],
+    "nucleus_dna_binding": [
+     [
+      "metal_ion_binding",
+      278
+     ],
+     [
+      "nucleus_dna_binding",
+      178
+     ],
+     [
+      "cytosol_soluble",
+      58
+     ]
+    ],
+    "rna_binding": [
+     [
+      "nucleus_dna_binding",
+      58
+     ],
+     [
+      "atp_binding",
+      54
+     ],
+     [
+      "ribosome_translation",
+      37
+     ]
+    ],
+    "atp_binding": [
+     [
+      "atp_binding",
+      22
+     ],
+     [
+      "metal_ion_binding",
+      20
+     ],
+     [
+      "cytosol_soluble",
+      13
+     ]
+    ],
+    "metal_ion_binding": [
+     [
+      "nucleus_dna_binding",
+      20
+     ],
+     [
+      "atp_binding",
+      17
+     ],
+     [
+      "metal_ion_binding",
+      16
+     ]
+    ],
+    "cytosol_soluble": [
+     [
+      "nucleus_dna_binding",
+      135
+     ],
+     [
+      "atp_binding",
+      47
+     ],
+     [
+      "cytosol_soluble",
+      41
+     ]
+    ]
+   },
+   "n": 3578,
+   "majority_baseline": 0.2493
+  },
+  "fam/quill-k": {
+   "accuracy": 0.8475,
+   "balanced_accuracy": 0.615,
+   "macro_auroc": 0.9861,
+   "per_class_recall": {
+    "collagen": 0.4286,
+    "keratin": 0.2308,
+    "zinc_finger": 0.8958,
+    "olfactory_receptor": 1.0,
+    "histone": 0.0,
+    "ribosomal_protein": 0.75,
+    "immunoglobulin_V": 1.0
+   },
+   "per_class_auroc": {
+    "collagen": 0.9902,
+    "keratin": 0.9736,
+    "zinc_finger": 0.9741,
+    "olfactory_receptor": 1.0,
+    "histone": 0.9957,
+    "ribosomal_protein": 0.9714,
+    "immunoglobulin_V": 0.9979
+   },
+   "confusions": {
+    "collagen": [
+     [
+      "collagen",
+      3
+     ],
+     [
+      "ribosomal_protein",
+      2
+     ],
+     [
+      "immunoglobulin_V",
+      2
+     ]
+    ],
+    "keratin": [
+     [
+      "ribosomal_protein",
+      13
+     ],
+     [
+      "immunoglobulin_V",
+      7
+     ],
+     [
+      "keratin",
+      6
+     ]
+    ],
+    "zinc_finger": [
+     [
+      "zinc_finger",
+      232
+     ],
+     [
+      "ribosomal_protein",
+      16
+     ],
+     [
+      "immunoglobulin_V",
+      11
+     ]
+    ],
+    "olfactory_receptor": [
+     [
+      "olfactory_receptor",
+      34
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ],
+    "histone": [
+     [
+      "ribosomal_protein",
+      3
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ],
+    "ribosomal_protein": [
+     [
+      "ribosomal_protein",
+      15
+     ],
+     [
+      "immunoglobulin_V",
+      5
+     ],
+     [
+      "collagen",
+      0
+     ]
+    ],
+    "immunoglobulin_V": [
+     [
+      "immunoglobulin_V",
+      38
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ]
+   },
+   "n": 387,
+   "majority_baseline": 0.6693,
+   "parameters": 24298
+  },
+  "fam/quill-s": {
+   "accuracy": 0.9044,
+   "balanced_accuracy": 0.7625,
+   "macro_auroc": 0.945,
+   "per_class_recall": {
+    "collagen": 0.5714,
+    "keratin": 0.6538,
+    "zinc_finger": 0.9459,
+    "olfactory_receptor": 1.0,
+    "histone": 0.6667,
+    "ribosomal_protein": 0.5,
+    "immunoglobulin_V": 1.0
+   },
+   "per_class_auroc": {
+    "collagen": 0.8632,
+    "keratin": 0.9212,
+    "zinc_finger": 0.9892,
+    "olfactory_receptor": 1.0,
+    "histone": 0.974,
+    "ribosomal_protein": 0.8672,
+    "immunoglobulin_V": 1.0
+   },
+   "confusions": {
+    "collagen": [
+     [
+      "collagen",
+      4
+     ],
+     [
+      "keratin",
+      3
+     ],
+     [
+      "zinc_finger",
+      0
+     ]
+    ],
+    "keratin": [
+     [
+      "keratin",
+      17
+     ],
+     [
+      "zinc_finger",
+      9
+     ],
+     [
+      "collagen",
+      0
+     ]
+    ],
+    "zinc_finger": [
+     [
+      "zinc_finger",
+      245
+     ],
+     [
+      "histone",
+      10
+     ],
+     [
+      "keratin",
+      3
+     ]
+    ],
+    "olfactory_receptor": [
+     [
+      "olfactory_receptor",
+      34
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ],
+    "histone": [
+     [
+      "histone",
+      2
+     ],
+     [
+      "ribosomal_protein",
+      1
+     ],
+     [
+      "collagen",
+      0
+     ]
+    ],
+    "ribosomal_protein": [
+     [
+      "ribosomal_protein",
+      10
+     ],
+     [
+      "histone",
+      7
+     ],
+     [
+      "immunoglobulin_V",
+      2
+     ]
+    ],
+    "immunoglobulin_V": [
+     [
+      "immunoglobulin_V",
+      38
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ]
+   },
+   "n": 387,
+   "majority_baseline": 0.6693,
+   "parameters": 24298
+  },
+  "fam/quill-k-composition-only": {
+   "accuracy": 0.845,
+   "balanced_accuracy": 0.6145,
+   "macro_auroc": 0.9828,
+   "per_class_recall": {
+    "collagen": 0.4286,
+    "keratin": 0.2308,
+    "zinc_finger": 0.8919,
+    "olfactory_receptor": 1.0,
+    "histone": 0.0,
+    "ribosomal_protein": 0.75,
+    "immunoglobulin_V": 1.0
+   },
+   "per_class_auroc": {
+    "collagen": 0.991,
+    "keratin": 0.9961,
+    "zinc_finger": 0.9643,
+    "olfactory_receptor": 1.0,
+    "histone": 0.9913,
+    "ribosomal_protein": 0.9495,
+    "immunoglobulin_V": 0.9873
+   },
+   "confusions": {
+    "collagen": [
+     [
+      "collagen",
+      3
+     ],
+     [
+      "ribosomal_protein",
+      2
+     ],
+     [
+      "immunoglobulin_V",
+      2
+     ]
+    ],
+    "keratin": [
+     [
+      "ribosomal_protein",
+      13
+     ],
+     [
+      "keratin",
+      6
+     ],
+     [
+      "immunoglobulin_V",
+      4
+     ]
+    ],
+    "zinc_finger": [
+     [
+      "zinc_finger",
+      231
+     ],
+     [
+      "ribosomal_protein",
+      16
+     ],
+     [
+      "immunoglobulin_V",
+      10
+     ]
+    ],
+    "olfactory_receptor": [
+     [
+      "olfactory_receptor",
+      34
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ],
+    "histone": [
+     [
+      "ribosomal_protein",
+      3
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ],
+    "ribosomal_protein": [
+     [
+      "ribosomal_protein",
+      15
+     ],
+     [
+      "immunoglobulin_V",
+      4
+     ],
+     [
+      "olfactory_receptor",
+      1
+     ]
+    ],
+    "immunoglobulin_V": [
+     [
+      "immunoglobulin_V",
+      38
+     ],
+     [
+      "collagen",
+      0
+     ],
+     [
+      "keratin",
+      0
+     ]
+    ]
+   },
+   "n": 387,
+   "majority_baseline": 0.6693
+  }
+ },
+ "bits": {
+  "go/quill-k": {
+   "bits_per_base_class_conditioned": 1.9184,
+   "bits_per_base_pooled": 1.9124,
+   "gain": -0.006,
+   "n_bases": 5735403
+  },
+  "go/quill-s": {
+   "bits_per_base_class_conditioned": 1.9195,
+   "bits_per_base_pooled": 1.925,
+   "gain": 0.0055,
+   "n_bases": 5735403
+  },
+  "fam/quill-k": {
+   "bits_per_base_class_conditioned": 1.8801,
+   "bits_per_base_pooled": 1.9604,
+   "gain": 0.0804,
+   "n_bases": 598107
+  },
+  "fam/quill-s": {
+   "bits_per_base_class_conditioned": 1.8846,
+   "bits_per_base_pooled": 1.954,
+   "gain": 0.0694,
+   "n_bases": 598107
+  }
+ },
+ "generate": {
+  "go/ribosome_translation": {
+   "composition_js_to_written": 0.00088,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.1,
+   "composition_js_to_real_heldout": 0.00701,
+   "n_real_heldout": 63
+  },
+  "go/secreted": {
+   "composition_js_to_written": 0.00096,
+   "tm_segments_mean": 0.17,
+   "tm_expected": 1.0,
+   "composition_js_to_real_heldout": 0.00498,
+   "n_real_heldout": 892
+  },
+  "go/integral_membrane": {
+   "composition_js_to_written": 0.00224,
+   "tm_segments_mean": 1.42,
+   "tm_expected": 4.0,
+   "composition_js_to_real_heldout": 0.01312,
+   "n_real_heldout": 746
+  },
+  "go/mitochondrion": {
+   "composition_js_to_written": 0.00125,
+   "tm_segments_mean": 0.33,
+   "tm_expected": 0.6,
+   "composition_js_to_real_heldout": 0.00466,
+   "n_real_heldout": 148
+  },
+  "go/cytoskeleton": {
+   "composition_js_to_written": 0.00218,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.15,
+   "composition_js_to_real_heldout": 0.01585,
+   "n_real_heldout": 251,
+   "period": 7,
+   "hydrophobic_by_heptad_position": [
+    0.405,
+    0.227,
+    0.255,
+    0.412,
+    0.223,
+    0.232,
+    0.268
+   ],
+   "hydrophobic_at_a_and_d": 0.408,
+   "hydrophobic_elsewhere": 0.241
+  },
+  "go/nucleus_dna_binding": {
+   "composition_js_to_written": 0.00025,
+   "tm_segments_mean": 0.08,
+   "tm_expected": 0.1,
+   "composition_js_to_real_heldout": 0.00606,
+   "n_real_heldout": 671
+  },
+  "go/rna_binding": {
+   "composition_js_to_written": 0.0005,
+   "tm_segments_mean": 0.17,
+   "tm_expected": 0.1,
+   "composition_js_to_real_heldout": 0.00348,
+   "n_real_heldout": 264
+  },
+  "go/atp_binding": {
+   "composition_js_to_written": 0.00052,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.35,
+   "composition_js_to_real_heldout": 0.00371,
+   "n_real_heldout": 98
+  },
+  "go/metal_ion_binding": {
+   "composition_js_to_written": 0.0006,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.3,
+   "composition_js_to_real_heldout": 0.00452,
+   "n_real_heldout": 92
+  },
+  "go/cytosol_soluble": {
+   "composition_js_to_written": 0.00078,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.2,
+   "composition_js_to_real_heldout": 0.00313,
+   "n_real_heldout": 353
+  },
+  "fam/collagen": {
+   "composition_js_to_written": 0.00261,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.05,
+   "composition_js_to_real_heldout": 0.04638,
+   "n_real_heldout": 7,
+   "period": 3,
+   "glycine_by_triplet_phase": [
+    0.826,
+    0.102,
+    0.096
+   ],
+   "proline_by_triplet_phase": [
+    0.044,
+    0.334,
+    0.283
+   ]
+  },
+  "fam/keratin": {
+   "composition_js_to_written": 0.00625,
+   "tm_segments_mean": 0.17,
+   "tm_expected": 0.1,
+   "composition_js_to_real_heldout": 0.00957,
+   "n_real_heldout": 26,
+   "period": 7,
+   "hydrophobic_by_heptad_position": [
+    0.408,
+    0.164,
+    0.197,
+    0.438,
+    0.191,
+    0.178,
+    0.233
+   ],
+   "hydrophobic_at_a_and_d": 0.423,
+   "hydrophobic_elsewhere": 0.193
+  },
+  "fam/zinc_finger": {
+   "composition_js_to_written": 0.00706,
+   "tm_segments_mean": 0.17,
+   "tm_expected": 0.05,
+   "composition_js_to_real_heldout": 0.00792,
+   "n_real_heldout": 259,
+   "period": 28,
+   "cysteine_at_anchored_positions": 0.557,
+   "cysteine_elsewhere": 0.052,
+   "histidine_at_anchored_positions": 0.53,
+   "histidine_elsewhere": 0.037,
+   "TGEKP_linkers_found": 0
+  },
+  "fam/olfactory_receptor": {
+   "composition_js_to_written": 0.01448,
+   "tm_segments_mean": 2.5,
+   "tm_expected": 7.0,
+   "composition_js_to_real_heldout": 0.01391,
+   "n_real_heldout": 34
+  },
+  "fam/histone": {
+   "composition_js_to_written": 0.00294,
+   "tm_segments_mean": 0.08,
+   "tm_expected": 0.05,
+   "composition_js_to_real_heldout": 0.01147,
+   "n_real_heldout": 3
+  },
+  "fam/ribosomal_protein": {
+   "composition_js_to_written": 0.00146,
+   "tm_segments_mean": 0.0,
+   "tm_expected": 0.1,
+   "composition_js_to_real_heldout": 0.00686,
+   "n_real_heldout": 20
+  },
+  "fam/immunoglobulin_V": {
+   "composition_js_to_written": 0.00372,
+   "tm_segments_mean": 0.17,
+   "tm_expected": 0.4,
+   "composition_js_to_real_heldout": 0.02291,
+   "n_real_heldout": 38
+  }
+ }
+}

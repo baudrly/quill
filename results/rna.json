@@ -1,0 +1,111 @@
+{
+ "validate": {
+  "top_tract -> cytosolic ribosome": {
+   "auroc": 0.5264,
+   "positives": 24,
+   "n": 3719
+  },
+  "top_tract -> structural constituent of ribosome": {
+   "auroc": 0.5192,
+   "positives": 33,
+   "n": 3719
+  },
+  "are_count -> cytokine activity": {
+   "auroc": 0.6671,
+   "positives": 47,
+   "n": 3719
+  },
+  "are_count -> inflammatory response": {
+   "auroc": 0.5474,
+   "positives": 87,
+   "n": 3719
+  },
+  "histone_stem_loop -> nucleosome": {
+   "auroc": 0.5,
+   "positives": 3,
+   "n": 3719
+  },
+  "histone_stem_loop -> structural constituent of chromatin": {
+   "auroc": NaN,
+   "positives": 0,
+   "n": 3719
+  },
+  "cai_written -> structural constituent of ribosome": {
+   "auroc": 0.5383,
+   "positives": 33,
+   "n": 3719
+  },
+  "cai_written -> cytosolic ribosome": {
+   "auroc": 0.6452,
+   "positives": 24,
+   "n": 3719
+  },
+  "long_3utr -> nervous system development": {
+   "auroc": 0.5888,
+   "positives": 319,
+   "n": 3719
+  },
+  "long_3utr -> neuron projection": {
+   "auroc": 0.5816,
+   "positives": 209,
+   "n": 3719
+  },
+  "g4_5utr -> DNA-binding transcription factor activity": {
+   "auroc": 0.5098,
+   "positives": 316,
+   "n": 3719
+  },
+  "folding": {
+   "auroc_structured_vs_loose": 0.7156,
+   "n": 2080,
+   "n_structured": 814,
+   "per_class": {
+    "Y_RNA": {
+     "n": 3,
+     "mean_fold_z": -0.793
+    },
+    "antisense_lncRNA": {
+     "n": 175,
+     "mean_fold_z": -0.975
+    },
+    "lincRNA": {
+     "n": 256,
+     "mean_fold_z": -0.938
+    },
+    "pre_miRNA": {
+     "n": 379,
+     "mean_fold_z": -6.063
+    },
+    "processed_pseudogene": {
+     "n": 835,
+     "mean_fold_z": -0.955
+    },
+    "snRNA": {
+     "n": 188,
+     "mean_fold_z": -1.02
+    },
+    "snoRNA_CD": {
+     "n": 56,
+     "mean_fold_z": -1.573
+    },
+    "snoRNA_HACA": {
+     "n": 51,
+     "mean_fold_z": -2.687
+    },
+    "srpRNA_7SL": {
+     "n": 137,
+     "mean_fold_z": -2.489
+    }
+   }
+  },
+  "prevalence": {
+   "g4_5utr": 0.0866,
+   "kozak_strong": 0.4168,
+   "are_nonamer": 0.0449,
+   "nmd_junction_in_3utr": 0.029,
+   "histone_stem_loop": 0.0,
+   "ire_5utr": 0.2009
+  },
+  "n_mrnas": 19016
+ }
+}

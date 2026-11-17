@@ -1,0 +1,702 @@
+{
+ "n_held": 3719,
+ "n_remote": 2793,
+ "models": {
+  "nano": {
+   "parameters": 97273,
+   "parts": {
+    "protein": 59502,
+    "prosite": 16302,
+    "rna": 19063,
+    "prior": 2387,
+    "scalars": 19
+   },
+   "mb": 0.29,
+   "terms": 2387,
+   "experts": [
+    "protein",
+    "prosite",
+    "rna",
+    "signatures"
+   ],
+   "tau": {
+    "protein": 4,
+    "prosite": 1,
+    "rna": 8,
+    "crosstalk": 8
+   },
+   "weights": {
+    "BP": {
+     "protein": 1.5,
+     "prosite": 1.5,
+     "rna": 0.0,
+     "signatures": 0.0
+    },
+    "MF": {
+     "protein": 0.25,
+     "prosite": 1.5,
+     "rna": 0.0,
+     "signatures": 0.25
+    },
+    "CC": {
+     "protein": 1.5,
+     "prosite": 1.0,
+     "rna": 0.0,
+     "signatures": 0.0
+    }
+   },
+   "crosstalk": {
+    "BP": 0.0,
+    "MF": 0.0,
+    "CC": 0.0
+   },
+   "held_out": {
+    "BP": 0.4126,
+    "BP_remote": 0.3662,
+    "MF": 0.5412,
+    "MF_remote": 0.5099,
+    "CC": 0.6321,
+    "CC_remote": 0.6124,
+    "EC": 0.4328,
+    "EC_remote": 0.404,
+    "slim": 0.4828
+   },
+   "first_pass": {
+    "BP": 0.4126,
+    "BP_remote": 0.3662,
+    "MF": 0.5412,
+    "MF_remote": 0.5099,
+    "CC": 0.6321,
+    "CC_remote": 0.6124,
+    "EC": 0.4328,
+    "EC_remote": 0.404,
+    "slim": 0.4828
+   },
+   "naive": {
+    "BP": 0.3637,
+    "BP_remote": 0.332,
+    "MF": 0.4096,
+    "MF_remote": 0.3934,
+    "CC": 0.5846,
+    "CC_remote": 0.5631,
+    "EC": 0.2665,
+    "EC_remote": 0.2569,
+    "slim": 0.3796
+   },
+   "seconds_per_1000_genes": 1.5
+  },
+  "small": {
+   "parameters": 360636,
+   "parts": {
+    "protein": 67527,
+    "prosite": 17258,
+    "rna": 26146,
+    "dna": 53384,
+    "kmer": 192119,
+    "prior": 4175,
+    "scalars": 27
+   },
+   "mb": 1.25,
+   "terms": 4175,
+   "experts": [
+    "kmer",
+    "protein",
+    "prosite",
+    "rna",
+    "dna",
+    "signatures"
+   ],
+   "tau": {
+    "kmer": 20,
+    "protein": 4,
+    "prosite": 1,
+    "rna": 2,
+    "dna": 32,
+    "crosstalk": 8
+   },
+   "weights": {
+    "BP": {
+     "kmer": 1.5,
+     "protein": 1.5,
+     "prosite": 1.5,
+     "rna": 0.0,
+     "dna": 0.0,
+     "signatures": 0.0
+    },
+    "MF": {
+     "kmer": 1.5,
+     "protein": 0.0,
+     "prosite": 1.5,
+     "rna": 0.0,
+     "dna": 0.0,
+     "signatures": 0.5
+    },
+    "CC": {
+     "kmer": 1.5,
+     "protein": 1.5,
+     "prosite": 1.0,
+     "rna": 0.5,
+     "dna": 0.0,
+     "signatures": 0.0
+    }
+   },
+   "crosstalk": {
+    "BP": 0.0,
+    "MF": 0.0,
+    "CC": 0.0
+   },
+   "held_out": {
+    "BP": 0.4253,
+    "BP_remote": 0.3754,
+    "MF": 0.5804,
+    "MF_remote": 0.5422,
+    "CC": 0.6356,
+    "CC_remote": 0.6133,
+    "EC": 0.4741,
+    "EC_remote": 0.4292,
+    "slim": 0.4987
+   },
+   "first_pass": {
+    "BP": 0.4253,
+    "BP_remote": 0.3754,
+    "MF": 0.5804,
+    "MF_remote": 0.5422,
+    "CC": 0.6356,
+    "CC_remote": 0.6133,
+    "EC": 0.4741,
+    "EC_remote": 0.4292,
+    "slim": 0.4987
+   },
+   "naive": {
+    "BP": 0.3637,
+    "BP_remote": 0.332,
+    "MF": 0.4096,
+    "MF_remote": 0.3934,
+    "CC": 0.5846,
+    "CC_remote": 0.5631,
+    "EC": 0.2665,
+    "EC_remote": 0.2569,
+    "slim": 0.3796
+   },
+   "seconds_per_1000_genes": 2.2
+  },
+  "medium": {
+   "parameters": 21201398,
+   "parts": {
+    "protein": 67527,
+    "prosite": 17258,
+    "rna": 26146,
+    "dna": 53384,
+    "kmer": 4151898,
+    "memory": 8833416,
+    "prior": 4175,
+    "scalars": 35,
+    "align": 8047559
+   },
+   "mb": 50.99,
+   "terms": 4175,
+   "experts": [
+    "kmer",
+    "memory",
+    "align",
+    "protein",
+    "prosite",
+    "rna",
+    "dna",
+    "signatures"
+   ],
+   "tau": {
+    "kmer": 80,
+    "memory": 0.06,
+    "align": 0.05,
+    "protein": 4,
+    "prosite": 1,
+    "rna": 2,
+    "dna": 32,
+    "crosstalk": 8
+   },
+   "weights": {
+    "BP": {
+     "kmer": 0.0,
+     "memory": 0.25,
+     "align": 1.5,
+     "protein": 0.25,
+     "prosite": 0.0,
+     "rna": 0.0,
+     "dna": 0.0,
+     "signatures": 0.0
+    },
+    "MF": {
+     "kmer": 0.0,
+     "memory": 0.25,
+     "align": 1.5,
+     "protein": 0.0,
+     "prosite": 0.0,
+     "rna": 0.25,
+     "dna": 0.0,
+     "signatures": 1.0
+    },
+    "CC": {
+     "kmer": 0.0,
+     "memory": 0.25,
+     "align": 1.5,
+     "protein": 1.0,
+     "prosite": 0.0,
+     "rna": 0.0,
+     "dna": 1.0,
+     "signatures": 0.5
+    }
+   },
+   "crosstalk": {
+    "BP": 0.0,
+    "MF": 0.0,
+    "CC": 0.0
+   },
+   "held_out": {
+    "BP": 0.5508,
+    "BP_remote": 0.4653,
+    "MF": 0.6898,
+    "MF_remote": 0.6452,
+    "CC": 0.679,
+    "CC_remote": 0.6476,
+    "EC": 0.6721,
+    "EC_remote": 0.598,
+    "slim": 0.6195
+   },
+   "first_pass": {
+    "BP": 0.5508,
+    "BP_remote": 0.4653,
+    "MF": 0.6898,
+    "MF_remote": 0.6452,
+    "CC": 0.679,
+    "CC_remote": 0.6476,
+    "EC": 0.6721,
+    "EC_remote": 0.598,
+    "slim": 0.6195
+   },
+   "naive": {
+    "BP": 0.3637,
+    "BP_remote": 0.332,
+    "MF": 0.4096,
+    "MF_remote": 0.3934,
+    "CC": 0.5846,
+    "CC_remote": 0.5631,
+    "EC": 0.2665,
+    "EC_remote": 0.2569,
+    "slim": 0.3796
+   },
+   "seconds_per_1000_genes": 3.9
+  },
+  "large": {
+   "parameters": 24022344,
+   "parts": {
+    "protein": 72242,
+    "prosite": 17624,
+    "rna": 28184,
+    "dna": 55880,
+    "kmer": 6932950,
+    "memory": 8861640,
+    "prior": 6230,
+    "scalars": 35,
+    "align": 8047559
+   },
+   "mb": 62.19,
+   "terms": 6230,
+   "experts": [
+    "kmer",
+    "memory",
+    "align",
+    "protein",
+    "prosite",
+    "rna",
+    "dna",
+    "signatures"
+   ],
+   "tau": {
+    "kmer": 80,
+    "memory": 0.06,
+    "align": 0.05,
+    "protein": 4,
+    "prosite": 1,
+    "rna": 2,
+    "dna": 32,
+    "crosstalk": 8
+   },
+   "weights": {
+    "BP": {
+     "kmer": 0.25,
+     "memory": 0.25,
+     "align": 1.5,
+     "protein": 0.25,
+     "prosite": 0.0,
+     "rna": 0.0,
+     "dna": 0.0,
+     "signatures": 0.0
+    },
+    "MF": {
+     "kmer": 0.0,
+     "memory": 0.0,
+     "align": 1.5,
+     "protein": 0.0,
+     "prosite": 0.25,
+     "rna": 0.0,
+     "dna": 0.0,
+     "signatures": 0.5
+    },
+    "CC": {
+     "kmer": 0.0,
+     "memory": 0.25,
+     "align": 1.5,
+     "protein": 1.0,
+     "prosite": 0.0,
+     "rna": 0.0,
+     "dna": 1.0,
+     "signatures": 0.5
+    }
+   },
+   "crosstalk": {
+    "BP": 0.0,
+    "MF": 0.0,
+    "CC": 0.0
+   },
+   "held_out": {
+    "BP": 0.5539,
+    "BP_remote": 0.4705,
+    "MF": 0.7042,
+    "MF_remote": 0.6569,
+    "CC": 0.6795,
+    "CC_remote": 0.6477,
+    "EC": 0.694,
+    "EC_remote": 0.6224,
+    "slim": 0.6184
+   },
+   "first_pass": {
+    "BP": 0.5539,
+    "BP_remote": 0.4705,
+    "MF": 0.7042,
+    "MF_remote": 0.6569,
+    "CC": 0.6795,
+    "CC_remote": 0.6477,
+    "EC": 0.694,
+    "EC_remote": 0.6224,
+    "slim": 0.6184
+   },
+   "naive": {
+    "BP": 0.3637,
+    "BP_remote": 0.332,
+    "MF": 0.4096,
+    "MF_remote": 0.3934,
+    "CC": 0.5846,
+    "CC_remote": 0.5631,
+    "EC": 0.2665,
+    "EC_remote": 0.2569,
+    "slim": 0.3796
+   },
+   "seconds_per_1000_genes": 4.8
+  }
+ },
+ "standalone": {
+  "kmer": {
+   "BP": 0.4143,
+   "BP_remote": 0.3558,
+   "MF": 0.5666,
+   "MF_remote": 0.5104,
+   "CC": 0.6003,
+   "CC_remote": 0.5703,
+   "EC": 0.4587,
+   "EC_remote": 0.3998,
+   "slim": 0.4407
+  },
+  "memory": {
+   "BP": 0.4576,
+   "BP_remote": 0.3848,
+   "MF": 0.5943,
+   "MF_remote": 0.5149,
+   "CC": 0.6136,
+   "CC_remote": 0.5887,
+   "EC": 0.5082,
+   "EC_remote": 0.3887,
+   "slim": 0.5262
+  },
+  "align": {
+   "BP": 0.5319,
+   "BP_remote": 0.456,
+   "MF": 0.7044,
+   "MF_remote": 0.6523,
+   "CC": 0.6691,
+   "CC_remote": 0.6399,
+   "EC": 0.6727,
+   "EC_remote": 0.598,
+   "slim": 0.6178
+  },
+  "protein": {
+   "BP": 0.3874,
+   "BP_remote": 0.3472,
+   "MF": 0.4764,
+   "MF_remote": 0.4627,
+   "CC": 0.6219,
+   "CC_remote": 0.6043,
+   "EC": 0.3275,
+   "EC_remote": 0.3075,
+   "slim": 0.4318
+  },
+  "prosite": {
+   "BP": 0.3935,
+   "BP_remote": 0.355,
+   "MF": 0.5431,
+   "MF_remote": 0.5063,
+   "CC": 0.6097,
+   "CC_remote": 0.587,
+   "EC": 0.4301,
+   "EC_remote": 0.4095,
+   "slim": 0.4412
+  },
+  "rna": {
+   "BP": 0.3606,
+   "BP_remote": 0.3323,
+   "MF": 0.4121,
+   "MF_remote": 0.4081,
+   "CC": 0.5905,
+   "CC_remote": 0.5708,
+   "EC": 0.2895,
+   "EC_remote": 0.2768,
+   "slim": 0.3916
+  },
+  "dna": {
+   "BP": 0.3637,
+   "BP_remote": 0.3331,
+   "MF": 0.4107,
+   "MF_remote": 0.3957,
+   "CC": 0.5863,
+   "CC_remote": 0.5653,
+   "EC": 0.2669,
+   "EC_remote": 0.2569,
+   "slim": 0.382
+  },
+  "signatures": {
+   "BP": 0.3638,
+   "BP_remote": 0.3323,
+   "MF": 0.4835,
+   "MF_remote": 0.4608,
+   "CC": 0.5886,
+   "CC_remote": 0.567,
+   "EC": 0.3585,
+   "EC_remote": 0.3326,
+   "slim": 0.4018
+  }
+ },
+ "without": {
+  "kmer": {
+   "BP": 0.5508,
+   "BP_remote": 0.4653,
+   "MF": 0.6898,
+   "MF_remote": 0.6452,
+   "CC": 0.679,
+   "CC_remote": 0.6476,
+   "EC": 0.6721,
+   "EC_remote": 0.598,
+   "slim": 0.6195
+  },
+  "memory": {
+   "BP": 0.5446,
+   "BP_remote": 0.4618,
+   "MF": 0.6972,
+   "MF_remote": 0.6501,
+   "CC": 0.6801,
+   "CC_remote": 0.6474,
+   "EC": 0.6731,
+   "EC_remote": 0.5991,
+   "slim": 0.6202
+  },
+  "align": {
+   "BP": 0.4301,
+   "BP_remote": 0.3641,
+   "MF": 0.5875,
+   "MF_remote": 0.4773,
+   "CC": 0.6345,
+   "CC_remote": 0.6112,
+   "EC": 0.5219,
+   "EC_remote": 0.4316,
+   "slim": 0.4732
+  },
+  "protein": {
+   "BP": 0.5488,
+   "BP_remote": 0.4609,
+   "MF": 0.6898,
+   "MF_remote": 0.6452,
+   "CC": 0.6645,
+   "CC_remote": 0.632,
+   "EC": 0.6721,
+   "EC_remote": 0.598,
+   "slim": 0.6176
+  },
+  "prosite": {
+   "BP": 0.5508,
+   "BP_remote": 0.4653,
+   "MF": 0.6898,
+   "MF_remote": 0.6452,
+   "CC": 0.679,
+   "CC_remote": 0.6476,
+   "EC": 0.6721,
+   "EC_remote": 0.598,
+   "slim": 0.6195
+  },
+  "rna": {
+   "BP": 0.5508,
+   "BP_remote": 0.4653,
+   "MF": 0.6918,
+   "MF_remote": 0.6472,
+   "CC": 0.679,
+   "CC_remote": 0.6476,
+   "EC": 0.6717,
+   "EC_remote": 0.5971,
+   "slim": 0.6195
+  },
+  "dna": {
+   "BP": 0.5508,
+   "BP_remote": 0.4653,
+   "MF": 0.6898,
+   "MF_remote": 0.6452,
+   "CC": 0.6761,
+   "CC_remote": 0.6404,
+   "EC": 0.6721,
+   "EC_remote": 0.598,
+   "slim": 0.6184
+  },
+  "signatures": {
+   "BP": 0.5508,
+   "BP_remote": 0.4653,
+   "MF": 0.6961,
+   "MF_remote": 0.6469,
+   "CC": 0.6789,
+   "CC_remote": 0.6476,
+   "EC": 0.6717,
+   "EC_remote": 0.5969,
+   "slim": 0.6189
+  }
+ },
+ "previous": {
+  "nano": {
+   "parameters": 97269,
+   "held_out": {
+    "BP": 0.4124,
+    "BP_remote": 0.3659,
+    "MF": 0.5389,
+    "MF_remote": 0.5058,
+    "CC": 0.6285,
+    "CC_remote": 0.6104,
+    "EC": 0.4295,
+    "EC_remote": 0.4013,
+    "slim": 0.4832
+   }
+  },
+  "small": {
+   "parameters": 307244,
+   "held_out": {
+    "BP": 0.4254,
+    "BP_remote": 0.3752,
+    "MF": 0.5802,
+    "MF_remote": 0.5419,
+    "CC": 0.6311,
+    "CC_remote": 0.6099,
+    "EC": 0.4727,
+    "EC_remote": 0.4279,
+    "slim": 0.4842
+   }
+  },
+  "medium": {
+   "parameters": 13100443,
+   "held_out": {
+    "BP": 0.4759,
+    "BP_remote": 0.3999,
+    "MF": 0.6274,
+    "MF_remote": 0.5567,
+    "CC": 0.6394,
+    "CC_remote": 0.615,
+    "EC": 0.5575,
+    "EC_remote": 0.4663,
+    "slim": 0.5144
+   }
+  },
+  "large": {
+   "parameters": 15918893,
+   "held_out": {
+    "BP": 0.4782,
+    "BP_remote": 0.4019,
+    "MF": 0.6127,
+    "MF_remote": 0.5501,
+    "CC": 0.6398,
+    "CC_remote": 0.615,
+    "EC": 0.566,
+    "EC_remote": 0.4651,
+    "slim": 0.5182
+   }
+  }
+ },
+ "reliability": {
+  "ece": 0.02401,
+  "ece_above_0p1": 0.1859,
+  "bins": [
+   {
+    "lo": 0.0,
+    "n": 14000661,
+    "predicted": 0.0108,
+    "observed": 0.0045
+   },
+   {
+    "lo": 0.1,
+    "n": 835704,
+    "predicted": 0.1361,
+    "observed": 0.0292
+   },
+   {
+    "lo": 0.2,
+    "n": 220676,
+    "predicted": 0.244,
+    "observed": 0.0741
+   },
+   {
+    "lo": 0.3,
+    "n": 103279,
+    "predicted": 0.3443,
+    "observed": 0.092
+   },
+   {
+    "lo": 0.4,
+    "n": 65364,
+    "predicted": 0.4476,
+    "observed": 0.1244
+   },
+   {
+    "lo": 0.5,
+    "n": 52063,
+    "predicted": 0.5485,
+    "observed": 0.1957
+   },
+   {
+    "lo": 0.6,
+    "n": 34465,
+    "predicted": 0.6466,
+    "observed": 0.2125
+   },
+   {
+    "lo": 0.7,
+    "n": 34933,
+    "predicted": 0.7496,
+    "observed": 0.2631
+   },
+   {
+    "lo": 0.8,
+    "n": 41414,
+    "predicted": 0.8531,
+    "observed": 0.3521
+   },
+   {
+    "lo": 0.9,
+    "n": 138266,
+    "predicted": 0.9813,
+    "observed": 0.702
+   }
+  ]
+ }
+}

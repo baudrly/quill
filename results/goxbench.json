@@ -1,0 +1,508 @@
+{
+ "n_held": 3719,
+ "n_remote": 2793,
+ "remote_threshold": 0.1,
+ "similarity_quantiles": {
+  "p10": 0.0253,
+  "p25": 0.0309,
+  "p50": 0.0435,
+  "p75": 0.0992,
+  "p90": 0.2262
+ },
+ "rule_hits_on_model_terms": 1921,
+ "n_terms": 4175,
+ "parameters": 12989491,
+ "parts": {
+  "dictionary": 4151898,
+  "memory_kmers": 7845744,
+  "memory_terms": 987672,
+  "prior": 4175,
+  "scalars": 2
+ },
+ "results": {
+  "naive": {
+   "BP": {
+    "fmax": 0.3637,
+    "precision": 0.3157,
+    "recall": 0.429,
+    "threshold": 0.155,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.332,
+    "precision": 0.2966,
+    "recall": 0.3771,
+    "threshold": 0.167,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.4096,
+    "precision": 0.4258,
+    "recall": 0.3945,
+    "threshold": 0.142,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.3934,
+    "precision": 0.4908,
+    "recall": 0.3283,
+    "threshold": 0.217,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.5846,
+    "precision": 0.6742,
+    "recall": 0.516,
+    "threshold": 0.304,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.5631,
+    "precision": 0.6569,
+    "recall": 0.4928,
+    "threshold": 0.304,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  },
+  "rules": {
+   "BP": {
+    "fmax": 0.3638,
+    "precision": 0.3157,
+    "recall": 0.4293,
+    "threshold": 0.155,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.3323,
+    "precision": 0.2967,
+    "recall": 0.3777,
+    "threshold": 0.167,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.4835,
+    "precision": 0.7562,
+    "recall": 0.3553,
+    "threshold": 0.329,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.4608,
+    "precision": 0.7551,
+    "recall": 0.3315,
+    "threshold": 0.329,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.5886,
+    "precision": 0.6754,
+    "recall": 0.5217,
+    "threshold": 0.304,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.567,
+    "precision": 0.6579,
+    "recall": 0.4983,
+    "threshold": 0.304,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  },
+  "memory": {
+   "BP": {
+    "fmax": 0.4576,
+    "precision": 0.4952,
+    "recall": 0.4253,
+    "threshold": 0.479,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.3848,
+    "precision": 0.4261,
+    "recall": 0.3508,
+    "threshold": 0.429,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.5943,
+    "precision": 0.6719,
+    "recall": 0.5327,
+    "threshold": 0.516,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.5149,
+    "precision": 0.6236,
+    "recall": 0.4384,
+    "threshold": 0.466,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.6136,
+    "precision": 0.5828,
+    "recall": 0.6478,
+    "threshold": 0.504,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.5887,
+    "precision": 0.605,
+    "recall": 0.5732,
+    "threshold": 0.504,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  },
+  "dictionary": {
+   "BP": {
+    "fmax": 0.4143,
+    "precision": 0.518,
+    "recall": 0.3452,
+    "threshold": 0.292,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.3558,
+    "precision": 0.322,
+    "recall": 0.3975,
+    "threshold": 0.217,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.5666,
+    "precision": 0.6937,
+    "recall": 0.4789,
+    "threshold": 0.329,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.5104,
+    "precision": 0.6936,
+    "recall": 0.4037,
+    "threshold": 0.329,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.6003,
+    "precision": 0.6401,
+    "recall": 0.5652,
+    "threshold": 0.354,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.5703,
+    "precision": 0.6219,
+    "recall": 0.5267,
+    "threshold": 0.354,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  },
+  "quill-xl": {
+   "BP": {
+    "fmax": 0.462,
+    "precision": 0.4934,
+    "recall": 0.4343,
+    "threshold": 0.479,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.3897,
+    "precision": 0.4237,
+    "recall": 0.3607,
+    "threshold": 0.429,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.606,
+    "precision": 0.7032,
+    "recall": 0.5324,
+    "threshold": 0.566,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.5345,
+    "precision": 0.6338,
+    "recall": 0.462,
+    "threshold": 0.479,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.6122,
+    "precision": 0.5766,
+    "recall": 0.6525,
+    "threshold": 0.504,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.5886,
+    "precision": 0.5983,
+    "recall": 0.5792,
+    "threshold": 0.504,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  },
+  "quill-xl+rules": {
+   "BP": {
+    "fmax": 0.462,
+    "precision": 0.4934,
+    "recall": 0.4343,
+    "threshold": 0.479,
+    "n_genes": 3319,
+    "n_terms": 3120
+   },
+   "BP_remote": {
+    "fmax": 0.3897,
+    "precision": 0.4237,
+    "recall": 0.3607,
+    "threshold": 0.429,
+    "n_genes": 2429,
+    "n_terms": 3120
+   },
+   "MF": {
+    "fmax": 0.6149,
+    "precision": 0.702,
+    "recall": 0.547,
+    "threshold": 0.566,
+    "n_genes": 3268,
+    "n_terms": 601
+   },
+   "MF_remote": {
+    "fmax": 0.5478,
+    "precision": 0.6559,
+    "recall": 0.4703,
+    "threshold": 0.504,
+    "n_genes": 2372,
+    "n_terms": 601
+   },
+   "CC": {
+    "fmax": 0.6131,
+    "precision": 0.5766,
+    "recall": 0.6545,
+    "threshold": 0.504,
+    "n_genes": 3545,
+    "n_terms": 454
+   },
+   "CC_remote": {
+    "fmax": 0.59,
+    "precision": 0.5984,
+    "recall": 0.5818,
+    "threshold": 0.504,
+    "n_genes": 2642,
+    "n_terms": 454
+   }
+  }
+ },
+ "remote_examples": [
+  {
+   "symbol": "RUNDC3A",
+   "chrom": "17",
+   "nearest_training_similarity": 0.0172,
+   "rules": [
+    "P-loop (Walker A)"
+   ],
+   "top_mf": [
+    [
+     "binding",
+     0.759,
+     true
+    ],
+    [
+     "protein binding",
+     0.588,
+     true
+    ],
+    [
+     "adenyl nucleotide binding",
+     0.55,
+     false
+    ],
+    [
+     "purine nucleotide binding",
+     0.55,
+     false
+    ]
+   ]
+  },
+  {
+   "symbol": "IZUMO4",
+   "chrom": "19",
+   "nearest_training_similarity": 0.0175,
+   "rules": [
+    "cytochrome c heme attachment"
+   ],
+   "top_mf": [
+    [
+     "binding",
+     0.759,
+     false
+    ],
+    [
+     "protein binding",
+     0.588,
+     false
+    ],
+    [
+     "catalytic activity",
+     0.32,
+     false
+    ],
+    [
+     "small molecule binding",
+     0.317,
+     false
+    ]
+   ]
+  },
+  {
+   "symbol": "PRODH",
+   "chrom": "22",
+   "nearest_training_similarity": 0.0182,
+   "rules": [
+    "leucine zipper heptad"
+   ],
+   "top_mf": [
+    [
+     "binding",
+     0.759,
+     true
+    ],
+    [
+     "protein binding",
+     0.588,
+     false
+    ],
+    [
+     "catalytic activity",
+     0.32,
+     true
+    ],
+    [
+     "small molecule binding",
+     0.317,
+     true
+    ]
+   ]
+  },
+  {
+   "symbol": "RASD1",
+   "chrom": "17",
+   "nearest_training_similarity": 0.0184,
+   "rules": [
+    "P-loop (Walker A)",
+    "CaaX prenylation box"
+   ],
+   "top_mf": [
+    [
+     "binding",
+     0.759,
+     true
+    ],
+    [
+     "protein binding",
+     0.588,
+     true
+    ],
+    [
+     "nucleotide binding",
+     0.55,
+     true
+    ],
+    [
+     "ribonucleotide binding",
+     0.55,
+     true
+    ]
+   ]
+  },
+  {
+   "symbol": "PGAP3",
+   "chrom": "17",
+   "nearest_training_similarity": 0.0185,
+   "rules": [
+    "C2H2 zinc finger"
+   ],
+   "top_mf": [
+    [
+     "zinc ion binding",
+     0.8,
+     false
+    ],
+    [
+     "transition metal ion binding",
+     0.8,
+     false
+    ],
+    [
+     "ion binding",
+     0.8,
+     false
+    ],
+    [
+     "cation binding",
+     0.8,
+     false
+    ]
+   ]
+  },
+  {
+   "symbol": "ELANE",
+   "chrom": "19",
+   "nearest_training_similarity": 0.019,
+   "rules": [
+    "leucine zipper heptad",
+    "serine protease histidine site"
+   ],
+   "top_mf": [
+    [
+     "catalytic activity, acting on a protein",
+     0.85,
+     true
+    ],
+    [
+     "serine-type peptidase activity",
+     0.85,
+     true
+    ],
+    [
+     "peptidase activity",
+     0.85,
+     true
+    ],
+    [
+     "endopeptidase activity",
+     0.85,
+     true
+    ]
+   ]
+  }
+ ]
+}

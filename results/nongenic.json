@@ -1,0 +1,572 @@
+{
+ "tf": {
+  "summary": {
+   "written": 33,
+   "found_in_jaspar": 33,
+   "jaspar_matrices": 879,
+   "jaspar_factors": 816,
+   "median_fraction_of_jaspar_max": 0.9733,
+   "at_least_0_9": 31,
+   "own_factor_rank_1": 7,
+   "own_factor_top_10": 23,
+   "median_rank": 4.0
+  },
+  "sites": [
+   {
+    "tf": "CTCF",
+    "site": "CCACCAGGGGGCGC",
+    "fraction_of_jaspar_max": 0.9788,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "CTCF",
+     "CTCFL",
+     "VEZF1"
+    ]
+   },
+   {
+    "tf": "SP1",
+    "site": "GGGGCGGGG",
+    "fraction_of_jaspar_max": 0.9737,
+    "rank_of_own_factor": 12,
+    "of_factors": 816,
+    "top3": [
+     "KLF5",
+     "KLF10",
+     "KLF14"
+    ]
+   },
+   {
+    "tf": "NRF1",
+    "site": "GCGCATGCGC",
+    "fraction_of_jaspar_max": 0.9694,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "NRF1",
+     "TCFL5",
+     "GMEB1"
+    ]
+   },
+   {
+    "tf": "YY1",
+    "site": "AAGATGGCG",
+    "fraction_of_jaspar_max": 0.9343,
+    "rank_of_own_factor": 4,
+    "of_factors": 816,
+    "top3": [
+     "YY2",
+     "ZFP42",
+     "CTCF"
+    ]
+   },
+   {
+    "tf": "CREB1",
+    "site": "TGACGTCA",
+    "fraction_of_jaspar_max": 0.9299,
+    "rank_of_own_factor": 25,
+    "of_factors": 816,
+    "top3": [
+     "CREB3L4",
+     "CREB5",
+     "FOS"
+    ]
+   },
+   {
+    "tf": "FOS::JUN",
+    "site": "TGAGTCA",
+    "fraction_of_jaspar_max": 0.975,
+    "rank_of_own_factor": 12,
+    "of_factors": 816,
+    "top3": [
+     "MAF",
+     "BACH1",
+     "MAFA"
+    ]
+   },
+   {
+    "tf": "RELA",
+    "site": "GGGAATTTCC",
+    "fraction_of_jaspar_max": 0.9743,
+    "rank_of_own_factor": 2,
+    "of_factors": 816,
+    "top3": [
+     "RBPJ",
+     "RELA",
+     "NFATC3"
+    ]
+   },
+   {
+    "tf": "TP53",
+    "site": "RRRCATGYYYRRRCATGYYY",
+    "fraction_of_jaspar_max": 0.9264,
+    "rank_of_own_factor": 2,
+    "of_factors": 816,
+    "top3": [
+     "TP73",
+     "TP53",
+     "TP63"
+    ]
+   },
+   {
+    "tf": "MAX",
+    "site": "CACGTG",
+    "fraction_of_jaspar_max": 0.9781,
+    "rank_of_own_factor": 5,
+    "of_factors": 816,
+    "top3": [
+     "HES1",
+     "CLOCK",
+     "HEY2"
+    ]
+   },
+   {
+    "tf": "USF1",
+    "site": "GTCACGTGAC",
+    "fraction_of_jaspar_max": 0.9495,
+    "rank_of_own_factor": 23,
+    "of_factors": 816,
+    "top3": [
+     "MEIS1",
+     "MAX",
+     "TFEB"
+    ]
+   },
+   {
+    "tf": "ELK1",
+    "site": "CCGGAAGT",
+    "fraction_of_jaspar_max": 0.9768,
+    "rank_of_own_factor": 14,
+    "of_factors": 816,
+    "top3": [
+     "ERF::NHLH1",
+     "ETS2",
+     "ETV3"
+    ]
+   },
+   {
+    "tf": "SPI1",
+    "site": "AAAGAGGAAGTG",
+    "fraction_of_jaspar_max": 0.9745,
+    "rank_of_own_factor": 3,
+    "of_factors": 816,
+    "top3": [
+     "SPIB",
+     "IKZF2",
+     "SPI1"
+    ]
+   },
+   {
+    "tf": "GATA1",
+    "site": "AGATAAG",
+    "fraction_of_jaspar_max": 0.9452,
+    "rank_of_own_factor": 11,
+    "of_factors": 816,
+    "top3": [
+     "GATA5",
+     "ZNF677",
+     "MECOM"
+    ]
+   },
+   {
+    "tf": "FOXA1",
+    "site": "TGTTTACTTA",
+    "fraction_of_jaspar_max": 0.9737,
+    "rank_of_own_factor": 11,
+    "of_factors": 816,
+    "top3": [
+     "FOXL1",
+     "FOXP3",
+     "FOXO6"
+    ]
+   },
+   {
+    "tf": "HNF1A",
+    "site": "GTTAATNATTAAC",
+    "fraction_of_jaspar_max": 0.9754,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "HNF1A",
+     "HNF1B",
+     "EVX2"
+    ]
+   },
+   {
+    "tf": "HNF4A",
+    "site": "GGTCAAAGGTCA",
+    "fraction_of_jaspar_max": 0.906,
+    "rank_of_own_factor": 23,
+    "of_factors": 816,
+    "top3": [
+     "NR2C2",
+     "NR2F1",
+     "THRB"
+    ]
+   },
+   {
+    "tf": "CEBPB",
+    "site": "TTGCGCAA",
+    "fraction_of_jaspar_max": 0.977,
+    "rank_of_own_factor": 3,
+    "of_factors": 816,
+    "top3": [
+     "CEBPG",
+     "CEBPE",
+     "CEBPB"
+    ]
+   },
+   {
+    "tf": "SOX2",
+    "site": "CCATTGTT",
+    "fraction_of_jaspar_max": 0.9742,
+    "rank_of_own_factor": 9,
+    "of_factors": 816,
+    "top3": [
+     "SOX9",
+     "POU2F1::SOX2",
+     "SOX8"
+    ]
+   },
+   {
+    "tf": "POU5F1",
+    "site": "ATGCAAAT",
+    "fraction_of_jaspar_max": 0.9733,
+    "rank_of_own_factor": 11,
+    "of_factors": 816,
+    "top3": [
+     "POU2F1::SOX2",
+     "POU3F2",
+     "POU3F1"
+    ]
+   },
+   {
+    "tf": "NFYA",
+    "site": "RRCCAATSRG",
+    "fraction_of_jaspar_max": 0.915,
+    "rank_of_own_factor": 4,
+    "of_factors": 816,
+    "top3": [
+     "HOXA1",
+     "LHX8",
+     "HOXB1"
+    ]
+   },
+   {
+    "tf": "SRF",
+    "site": "CCWWWWWWGG",
+    "fraction_of_jaspar_max": 0.8063,
+    "rank_of_own_factor": 3,
+    "of_factors": 816,
+    "top3": [
+     "VAX2",
+     "NR1H3::RXRA",
+     "SRF"
+    ]
+   },
+   {
+    "tf": "STAT3",
+    "site": "TTCCNGGAA",
+    "fraction_of_jaspar_max": 0.9426,
+    "rank_of_own_factor": 4,
+    "of_factors": 816,
+    "top3": [
+     "STAT4",
+     "STAT1",
+     "NFATC3"
+    ]
+   },
+   {
+    "tf": "IRF1",
+    "site": "GAAASTGAAAST",
+    "fraction_of_jaspar_max": 0.9595,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "IRF1",
+     "STAT1::STAT2",
+     "IRF7"
+    ]
+   },
+   {
+    "tf": "REST",
+    "site": "TTCAGCACCATGGACAGCGCC",
+    "fraction_of_jaspar_max": 0.9752,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "REST",
+     "MEIS1",
+     "HOXC8"
+    ]
+   },
+   {
+    "tf": "TEAD1",
+    "site": "ACATTCCA",
+    "fraction_of_jaspar_max": 0.9738,
+    "rank_of_own_factor": 5,
+    "of_factors": 816,
+    "top3": [
+     "ZFP14",
+     "TEAD3",
+     "TEAD4"
+    ]
+   },
+   {
+    "tf": "RUNX1",
+    "site": "TGTGGTTT",
+    "fraction_of_jaspar_max": 0.9786,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "RUNX1",
+     "BCL11B",
+     "RUNX2"
+    ]
+   },
+   {
+    "tf": "E2F1",
+    "site": "TTTSSCGC",
+    "fraction_of_jaspar_max": 0.9156,
+    "rank_of_own_factor": 3,
+    "of_factors": 816,
+    "top3": [
+     "E2F8",
+     "E2F2",
+     "E2F1"
+    ]
+   },
+   {
+    "tf": "MEF2A",
+    "site": "CTAWWWWTAG",
+    "fraction_of_jaspar_max": 0.8499,
+    "rank_of_own_factor": 5,
+    "of_factors": 816,
+    "top3": [
+     "MEF2B",
+     "MEF2D",
+     "MEF2C"
+    ]
+   },
+   {
+    "tf": "KLF4",
+    "site": "GCCACACCC",
+    "fraction_of_jaspar_max": 0.9189,
+    "rank_of_own_factor": 15,
+    "of_factors": 816,
+    "top3": [
+     "KLF9",
+     "KLF5",
+     "KLF2"
+    ]
+   },
+   {
+    "tf": "NR3C1",
+    "site": "AGAACANNNTGTTCT",
+    "fraction_of_jaspar_max": 0.9401,
+    "rank_of_own_factor": 2,
+    "of_factors": 816,
+    "top3": [
+     "PGR",
+     "NR3C1",
+     "NR3C2"
+    ]
+   },
+   {
+    "tf": "ESR1",
+    "site": "AGGTCANNNTGACCT",
+    "fraction_of_jaspar_max": 0.9446,
+    "rank_of_own_factor": 9,
+    "of_factors": 816,
+    "top3": [
+     "NR2C2",
+     "NR1H3",
+     "NR1H4"
+    ]
+   },
+   {
+    "tf": "EGR1",
+    "site": "GCGTGGGCG",
+    "fraction_of_jaspar_max": 0.9745,
+    "rank_of_own_factor": 4,
+    "of_factors": 816,
+    "top3": [
+     "EGR2",
+     "EGR4",
+     "EGR3"
+    ]
+   },
+   {
+    "tf": "TBP",
+    "site": "TATAAAAG",
+    "fraction_of_jaspar_max": 0.9787,
+    "rank_of_own_factor": 1,
+    "of_factors": 816,
+    "top3": [
+     "TBP",
+     "ZNF354A",
+     "CDX1"
+    ]
+   }
+  ]
+ },
+ "repeats": {
+  "Alu": {
+   "chr21": {
+    "loci": 4771,
+    "per_mb": 119.0,
+    "shuffled_loci_mean": 0.0,
+    "enrichment": 4771.0,
+    "mb": 40.1
+   },
+   "chr22": {
+    "loci": 9360,
+    "per_mb": 239.0,
+    "shuffled_loci_mean": 0.6,
+    "enrichment": 9360.0,
+    "mb": 39.2
+   }
+  },
+  "L1": {
+   "chr21": {
+    "loci": 62,
+    "per_mb": 1.5,
+    "shuffled_loci_mean": 4.6,
+    "enrichment": 13.5,
+    "mb": 40.1
+   },
+   "chr22": {
+    "loci": 48,
+    "per_mb": 1.2,
+    "shuffled_loci_mean": 1.8,
+    "enrichment": 26.7,
+    "mb": 39.2
+   }
+  },
+  "k": 16
+ },
+ "regulatory": {
+  "human_ensembl_regulatory": {
+   "n_train": 6000,
+   "n_test": 6000,
+   "n_class": 3,
+   "majority": 0.3333,
+   "composition (3-mers)": {
+    "accuracy": 0.5533,
+    "n_features": 64
+   },
+   "composition + grammar": {
+    "accuracy": 0.5778,
+    "n_features": 77
+   },
+   "composition + written TF sites": {
+    "accuracy": 0.5882,
+    "n_features": 97
+   },
+   "composition + JASPAR": {
+    "accuracy": 0.5892,
+    "n_features": 880
+   },
+   "composition + grammar + written": {
+    "accuracy": 0.5988,
+    "n_features": 110
+   },
+   "all four": {
+    "accuracy": 0.5937,
+    "n_features": 926
+   }
+  },
+  "human_enhancers_cohn": {
+   "n_train": 4000,
+   "n_test": 4000,
+   "n_class": 2,
+   "majority": 0.5,
+   "composition (3-mers)": {
+    "accuracy": 0.6957,
+    "n_features": 64
+   },
+   "composition + grammar": {
+    "accuracy": 0.7188,
+    "n_features": 77
+   },
+   "composition + written TF sites": {
+    "accuracy": 0.7085,
+    "n_features": 97
+   },
+   "composition + JASPAR": {
+    "accuracy": 0.6795,
+    "n_features": 880
+   },
+   "composition + grammar + written": {
+    "accuracy": 0.7215,
+    "n_features": 110
+   },
+   "all four": {
+    "accuracy": 0.687,
+    "n_features": 926
+   }
+  },
+  "human_ocr_ensembl": {
+   "n_train": 3997,
+   "n_test": 3995,
+   "n_class": 2,
+   "majority": 0.5006,
+   "composition (3-mers)": {
+    "accuracy": 0.6185,
+    "n_features": 64
+   },
+   "composition + grammar": {
+    "accuracy": 0.6373,
+    "n_features": 77
+   },
+   "composition + written TF sites": {
+    "accuracy": 0.636,
+    "n_features": 97
+   },
+   "composition + JASPAR": {
+    "accuracy": 0.6378,
+    "n_features": 880
+   },
+   "composition + grammar + written": {
+    "accuracy": 0.6526,
+    "n_features": 110
+   },
+   "all four": {
+    "accuracy": 0.6328,
+    "n_features": 926
+   }
+  },
+  "human_nontata_promoters": {
+   "n_train": 4000,
+   "n_test": 4000,
+   "n_class": 2,
+   "majority": 0.5,
+   "composition (3-mers)": {
+    "accuracy": 0.8163,
+    "n_features": 64
+   },
+   "composition + grammar": {
+    "accuracy": 0.8313,
+    "n_features": 77
+   },
+   "composition + written TF sites": {
+    "accuracy": 0.8147,
+    "n_features": 97
+   },
+   "composition + JASPAR": {
+    "accuracy": 0.8003,
+    "n_features": 880
+   },
+   "composition + grammar + written": {
+    "accuracy": 0.839,
+    "n_features": 110
+   },
+   "all four": {
+    "accuracy": 0.8137,
+    "n_features": 926
+   }
+  }
+ },
+ "jaspar_factors_used": 816,
+ "written_sites_used": 33
+}

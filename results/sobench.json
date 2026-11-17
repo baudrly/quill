@@ -1,0 +1,439 @@
+{
+ "classify": {
+  "quill-k": {
+   "accuracy": 0.4702,
+   "balanced_accuracy": 0.4814,
+   "macro_auroc": 0.8762,
+   "per_class_recall": {
+    "snoRNA_CD": 0.7679,
+    "snoRNA_HACA": 0.6667,
+    "snRNA": 0.8245,
+    "pre_miRNA": 0.2084,
+    "Y_RNA": 0.0,
+    "srpRNA_7SL": 0.5474,
+    "lincRNA": 0.8711,
+    "antisense_lncRNA": 0.0057,
+    "processed_pseudogene": 0.4407
+   },
+   "per_class_auroc": {
+    "snoRNA_CD": 0.9268,
+    "snoRNA_HACA": 0.9485,
+    "snRNA": 0.9054,
+    "pre_miRNA": 0.9515,
+    "Y_RNA": 0.7652,
+    "srpRNA_7SL": 0.957,
+    "lincRNA": 0.8334,
+    "antisense_lncRNA": 0.8489,
+    "processed_pseudogene": 0.7495
+   },
+   "confusions": {
+    "snoRNA_CD": [
+     [
+      "snoRNA_CD",
+      43
+     ],
+     [
+      "snRNA",
+      9
+     ],
+     [
+      "processed_pseudogene",
+      4
+     ]
+    ],
+    "snoRNA_HACA": [
+     [
+      "snoRNA_HACA",
+      34
+     ],
+     [
+      "snRNA",
+      13
+     ],
+     [
+      "snoRNA_CD",
+      2
+     ]
+    ],
+    "snRNA": [
+     [
+      "snRNA",
+      155
+     ],
+     [
+      "snoRNA_HACA",
+      29
+     ],
+     [
+      "snoRNA_CD",
+      3
+     ]
+    ],
+    "pre_miRNA": [
+     [
+      "snRNA",
+      198
+     ],
+     [
+      "pre_miRNA",
+      79
+     ],
+     [
+      "snoRNA_CD",
+      61
+     ]
+    ],
+    "Y_RNA": [
+     [
+      "snoRNA_CD",
+      2
+     ],
+     [
+      "snRNA",
+      1
+     ],
+     [
+      "snoRNA_HACA",
+      0
+     ]
+    ],
+    "srpRNA_7SL": [
+     [
+      "srpRNA_7SL",
+      75
+     ],
+     [
+      "snRNA",
+      47
+     ],
+     [
+      "snoRNA_HACA",
+      9
+     ]
+    ],
+    "lincRNA": [
+     [
+      "lincRNA",
+      223
+     ],
+     [
+      "processed_pseudogene",
+      12
+     ],
+     [
+      "snRNA",
+      10
+     ]
+    ],
+    "antisense_lncRNA": [
+     [
+      "lincRNA",
+      153
+     ],
+     [
+      "processed_pseudogene",
+      13
+     ],
+     [
+      "snRNA",
+      6
+     ]
+    ],
+    "processed_pseudogene": [
+     [
+      "processed_pseudogene",
+      368
+     ],
+     [
+      "lincRNA",
+      187
+     ],
+     [
+      "snRNA",
+      153
+     ]
+    ]
+   },
+   "n": 2080,
+   "majority_baseline": 0.4014,
+   "parameters": 260
+  },
+  "quill-s": {
+   "accuracy": 0.4894,
+   "balanced_accuracy": 0.463,
+   "macro_auroc": 0.8683,
+   "per_class_recall": {
+    "snoRNA_CD": 0.75,
+    "snoRNA_HACA": 0.6863,
+    "snRNA": 0.8298,
+    "pre_miRNA": 0.1979,
+    "Y_RNA": 0.0,
+    "srpRNA_7SL": 0.6715,
+    "lincRNA": 0.3359,
+    "antisense_lncRNA": 0.0743,
+    "processed_pseudogene": 0.6216
+   },
+   "per_class_auroc": {
+    "snoRNA_CD": 0.9221,
+    "snoRNA_HACA": 0.9395,
+    "snRNA": 0.915,
+    "pre_miRNA": 0.8493,
+    "Y_RNA": 0.7739,
+    "srpRNA_7SL": 0.9479,
+    "lincRNA": 0.827,
+    "antisense_lncRNA": 0.8408,
+    "processed_pseudogene": 0.7994
+   },
+   "confusions": {
+    "snoRNA_CD": [
+     [
+      "snoRNA_CD",
+      42
+     ],
+     [
+      "snRNA",
+      10
+     ],
+     [
+      "processed_pseudogene",
+      4
+     ]
+    ],
+    "snoRNA_HACA": [
+     [
+      "snoRNA_HACA",
+      35
+     ],
+     [
+      "snRNA",
+      12
+     ],
+     [
+      "snoRNA_CD",
+      2
+     ]
+    ],
+    "snRNA": [
+     [
+      "snRNA",
+      156
+     ],
+     [
+      "snoRNA_HACA",
+      27
+     ],
+     [
+      "snoRNA_CD",
+      3
+     ]
+    ],
+    "pre_miRNA": [
+     [
+      "snRNA",
+      192
+     ],
+     [
+      "pre_miRNA",
+      75
+     ],
+     [
+      "snoRNA_CD",
+      73
+     ]
+    ],
+    "Y_RNA": [
+     [
+      "snoRNA_CD",
+      2
+     ],
+     [
+      "snRNA",
+      1
+     ],
+     [
+      "snoRNA_HACA",
+      0
+     ]
+    ],
+    "srpRNA_7SL": [
+     [
+      "srpRNA_7SL",
+      92
+     ],
+     [
+      "snRNA",
+      25
+     ],
+     [
+      "snoRNA_HACA",
+      12
+     ]
+    ],
+    "lincRNA": [
+     [
+      "processed_pseudogene",
+      147
+     ],
+     [
+      "lincRNA",
+      86
+     ],
+     [
+      "antisense_lncRNA",
+      11
+     ]
+    ],
+    "antisense_lncRNA": [
+     [
+      "processed_pseudogene",
+      91
+     ],
+     [
+      "lincRNA",
+      65
+     ],
+     [
+      "antisense_lncRNA",
+      13
+     ]
+    ],
+    "processed_pseudogene": [
+     [
+      "processed_pseudogene",
+      519
+     ],
+     [
+      "snRNA",
+      109
+     ],
+     [
+      "lincRNA",
+      72
+     ]
+    ]
+   },
+   "n": 2080,
+   "majority_baseline": 0.4014,
+   "parameters": 260
+  },
+  "quill-k-without-boxes": {
+   "accuracy": 0.5611,
+   "macro_auroc": 0.8684,
+   "balanced_accuracy": 0.4283
+  },
+  "quill-k-without-length": {
+   "accuracy": 0.1389,
+   "macro_auroc": 0.7114,
+   "balanced_accuracy": 0.2661
+  },
+  "quill-k-without-gc": {
+   "accuracy": 0.4615,
+   "macro_auroc": 0.8758,
+   "balanced_accuracy": 0.4763
+  },
+  "quill-k-without-hairpin": {
+   "accuracy": 0.4788,
+   "macro_auroc": 0.8748,
+   "balanced_accuracy": 0.4867
+  },
+  "quill-k-without-exons": {
+   "accuracy": 0.2971,
+   "macro_auroc": 0.864,
+   "balanced_accuracy": 0.4359
+  }
+ },
+ "boxes": {
+  "snoRNA_CD/BOX_C": {
+   "n_members": 56,
+   "mean_in_members": 7.448,
+   "mean_in_shuffled": 0.887,
+   "mean_in_other_classes": 0.039,
+   "auroc_vs_shuffled": 0.8916,
+   "auroc_vs_other_classes": 0.9338
+  },
+  "snoRNA_CD/BOX_D": {
+   "n_members": 56,
+   "mean_in_members": 4.714,
+   "mean_in_shuffled": 0.812,
+   "mean_in_other_classes": 0.633,
+   "auroc_vs_shuffled": 0.7647,
+   "auroc_vs_other_classes": 0.7835
+  },
+  "snoRNA_HACA/BOX_H": {
+   "n_members": 51,
+   "mean_in_members": 4.747,
+   "mean_in_shuffled": 2.824,
+   "mean_in_other_classes": 2.022,
+   "auroc_vs_shuffled": 0.7115,
+   "auroc_vs_other_classes": 0.8033
+  },
+  "snoRNA_HACA/BOX_ACA": {
+   "n_members": 51,
+   "mean_in_members": 3.708,
+   "mean_in_shuffled": -0.473,
+   "mean_in_other_classes": -0.908,
+   "auroc_vs_shuffled": 0.8414,
+   "auroc_vs_other_classes": 0.847
+  },
+  "snRNA/SM_SITE": {
+   "n_members": 188,
+   "mean_in_members": 5.623,
+   "mean_in_shuffled": 3.277,
+   "mean_in_other_classes": 2.455,
+   "auroc_vs_shuffled": 0.7198,
+   "auroc_vs_other_classes": 0.7864
+  }
+ },
+ "minor_intron": {
+  "n_introns": 38692,
+  "n_atac": 39,
+  "atac_fraction": 0.00101,
+  "written_u12_fraction": 0.0035,
+  "auroc_u12_vs_u2_score": 0.9996,
+  "auroc_donor_only": 0.9831,
+  "auroc_branch_only": 0.8221
+ },
+ "cis_elements": {
+  "n_tss": 19018,
+  "TATA": {
+   "auroc_vs_shuffled_same_window": 0.4664,
+   "auroc_vs_distal_window": 0.3394,
+   "mean_at_tss": -5.759,
+   "mean_shuffled": -5.271,
+   "mean_distal": -2.86,
+   "n": 19018
+  },
+  "CCAAT": {
+   "auroc_vs_shuffled_same_window": 0.4932,
+   "auroc_vs_distal_window": 0.4606,
+   "mean_at_tss": 3.469,
+   "mean_shuffled": 3.461,
+   "mean_distal": 3.704,
+   "n": 19018
+  },
+  "GC_BOX": {
+   "auroc_vs_shuffled_same_window": 0.5689,
+   "auroc_vs_distal_window": 0.6462,
+   "mean_at_tss": 4.529,
+   "mean_shuffled": 3.784,
+   "mean_distal": 2.76,
+   "n": 19018
+  },
+  "INR": {
+   "auroc_vs_shuffled_same_window": 0.5286,
+   "auroc_vs_distal_window": 0.4358,
+   "mean_at_tss": 0.958,
+   "mean_shuffled": 0.69,
+   "mean_distal": 1.503,
+   "n": 19018
+  },
+  "TCT": {
+   "auroc_vs_shuffled_same_window": 0.5003,
+   "auroc_vs_distal_window": 0.4601,
+   "mean_at_tss": 0.188,
+   "mean_shuffled": 0.253,
+   "mean_distal": 0.622,
+   "n": 19018
+  }
+ }
+}
