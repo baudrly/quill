@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quill - a 1.4M-parameter mammalian DNA model in your browser</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f16; --panel:#121823; --panel2:#182030; --line:#263347; --line2:#334156;
+  --ink:#e6edf7; --ink2:#9aabc4; --ink3:#6b7d99;
+  --acc:#5eead4; --acc2:#38bdf8;
+  --c-intergenic:#5a6b85; --c-cpg_island:#14b8a6; --c-tandem:#f59e0b;
+  --c-utr5:#60a5fa; --c-cds:#34d399; --c-intron:#3b4a63; --c-splice:#a78bfa;
+  --c-utr3:#38bdf8; --c-ncrna:#f472b6; --c-polya:#fb923c; --c-start:#22c55e; --c-stop:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{padding:0 0 80px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+code,.mono,pre{font-family:'JetBrains Mono',ui-monospace,monospace}
+a{color:var(--acc2)}
+header{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#101723,#0b0f16);
+  padding:30px 0 22px;margin-bottom:26px}
+h1{margin:0 0 6px;font-size:25px;letter-spacing:-.02em;font-weight:700}
+h1 .q{color:var(--acc)}
+.sub{color:var(--ink2);font-size:14px;max-width:760px;line-height:1.55}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+  padding:5px 11px;font-size:11.5px;color:var(--ink2)}
+.chip b{color:var(--ink);font-weight:600}
+nav{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:24px;flex-wrap:wrap}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink3);
+  padding:11px 15px;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
+nav button:hover{color:var(--ink2)}
+nav button.on{color:var(--acc);border-bottom-color:var(--acc)}
+button.mini{font-size:11px;padding:3px 8px;margin:2px 0;border-radius:5px}
+.tab{display:none}.tab.on{display:block}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:18px}
+.panel h2{margin:0 0 4px;font-size:15px;font-weight:600}
+.panel h2 + .hint{margin-top:0}
+.hint{color:var(--ink3);font-size:12.5px;line-height:1.5;margin:6px 0 0}
+label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink3);margin-bottom:7px;font-weight:600}
+input[type=text],textarea,select{width:100%;background:#0c1118;border:1px solid var(--line2);
+  color:var(--ink);border-radius:8px;padding:11px 13px;font:inherit;font-size:14px}
+textarea{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;resize:vertical}
+input[type=text]:focus,textarea:focus{outline:0;border-color:var(--acc)}
+input[type=range]{width:100%}
+.btn{background:var(--acc);color:#04231d;border:0;border-radius:8px;padding:11px 20px;
+  font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.sec{background:var(--panel2);color:var(--ink);border:1px solid var(--line2)}
+.row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.row>*{flex:1 1 auto}
+.ex{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.ex button{background:#0e1520;border:1px solid var(--line);color:var(--ink2);border-radius:7px;
+  padding:6px 10px;font:inherit;font-size:12px;cursor:pointer;text-align:left}
+.ex button:hover{border-color:var(--acc);color:var(--ink)}
+.parse{margin-top:12px;background:#0c1118;border:1px solid var(--line);border-radius:8px;
+  padding:11px 13px;font-size:12.5px;color:var(--ink2);line-height:1.8}
+.parse .k{color:var(--ink3);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.parse .v{color:var(--acc);font-weight:600}
+.parse .unk{color:var(--c-tandem)}
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-top:4px}
+.vocab div{background:#0c1118;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.vocab h4{margin:0 0 5px;font-size:12px;color:var(--ink);font-weight:600}
+.vocab p{margin:0;font-size:11.5px;color:var(--ink3);line-height:1.6}
+.vocab code{color:var(--acc2);font-size:11px}
+.legend{display:flex;gap:11px;flex-wrap:wrap;margin:12px 0 0;font-size:11.5px;color:var(--ink2)}
+.legend span{display:flex;align-items:center;gap:5px}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+canvas{display:block;width:100%;border-radius:8px;background:#0c1118}
+.seqbox{background:#0c1118;border:1px solid var(--line);border-radius:8px;padding:13px;
+  max-height:290px;overflow:auto;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.85;
+  white-space:pre-wrap;word-break:break-all}
+.seqbox .n{color:var(--ink3);user-select:none}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-top:14px}
+.stat{background:#0c1118;border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.stat .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
+.stat .v{font-size:19px;font-weight:600;margin-top:3px;letter-spacing:-.01em}
+.stat .v small{font-size:11.5px;color:var(--ink2);font-weight:400}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+th{color:var(--ink3);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+td.num,th.num{text-align:right;font-family:'JetBrains Mono',monospace}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+.note{background:#101b1a;border:1px solid #1d4a44;border-left:3px solid var(--acc);
+  border-radius:8px;padding:11px 14px;font-size:12.5px;color:#a7d9d1;line-height:1.6;margin-top:14px}
+.warn{background:#1c1510;border-color:#4a3a1d;border-left-color:var(--c-tandem);color:#e2c79a}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid var(--line2);
+  border-top-color:var(--acc);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.prot{background:#0c1118;border:1px solid var(--line);border-radius:8px;padding:12px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.9;word-break:break-all;color:#cde}
+.prot .m{color:var(--c-start);font-weight:700}.prot .s{color:var(--c-stop);font-weight:700}
+.hm{overflow-x:auto}
+footer{color:var(--ink3);font-size:12px;border-top:1px solid var(--line);padding-top:18px;line-height:1.7}
+.bar{height:7px;background:#0c1118;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc)}
+#v3-pick .btn.sec.on{border-color:var(--acc);color:var(--acc)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1><span class="q">Quill</span> - an LLM-written mammalian DNA model</h1>
+  <p class="sub">Every parameter below was <em>measured</em> by counting human genome sequence and annotation -
+  no gradient descent anywhere. A small example model is in this page and runs on your CPU.</p>
+  <div class="chips" id="hdr"><span class="chip"><span class="spin"></span> loading parameters…</span></div>
+</div></header>
+
+<div class="wrap">
+<nav>
+  <button class="on" data-t="gen">Generate</button>
+  <button data-t="ann">Annotate</button>
+  <button data-t="mut">Mutate</button>
+  <button data-t="fn">Gene function</button>
+  <button data-t="ont">Ontology</button>
+  <button data-t="v3">3D views</button>
+  <button data-t="ins">Inside the model</button>
+  <button data-t="abt">What it can and can't do</button>
+</nav>
+
+<!-- ============ GENERATE ============ -->
+<div class="tab on" id="t-gen">
+  <div class="panel">
+    <h2>Prompt the model</h2>
+    <p class="hint">Describe what you want in plain words. Quill reads your prompt, picks a starting
+    point in its gene grammar, then writes DNA base by base - the same way it would predict it.</p>
+    <div class="row" style="margin-top:14px">
+      <div style="flex:4 1 380px">
+        <label for="prompt">Prompt</label>
+        <input type="text" id="prompt" value="a protein-coding gene, GC-rich, 9000 bp"
+               placeholder="e.g. a protein-coding gene, GC-rich, 9000 bp" autocomplete="off">
+      </div>
+      <div style="flex:0 0 auto"><button class="btn" id="go">Generate</button></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;margin-top:12px;text-transform:none;
+      letter-spacing:0;font-size:12.5px;color:var(--ink2);font-weight:400;cursor:pointer">
+      <input type="checkbox" id="nostop" checked style="width:auto;accent-color:#5eead4">
+      Constrain the reading frame - forbid bases that would create an in-frame stop.
+      The codon model already gives stops zero probability, but it carries only a third of the
+      mixture weight, so without this a long ORF collects stops from the context model.
+    </label>
+    <div class="ex" id="examples"></div>
+    <div class="parse" id="parse"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Prompt vocabulary</h2>
+    <p class="hint">Quill has no language model. It matches these words to states and conditions in its
+    grammar, and tells you above exactly what it understood.</p>
+    <div class="vocab">
+      <div><h4>What to make</h4><p><code>protein-coding gene</code> · <code>gene</code> ·
+        <code>exon</code> - a transcript with UTRs, coding exons, spliced introns and a poly(A) signal</p></div>
+      <div><h4></h4><p><code>CpG island</code> · <code>promoter</code> - an unmethylated CpG-rich island,
+        which may run into a transcription start</p></div>
+      <div><h4></h4><p><code>intergenic</code> · <code>junk</code> · <code>background</code> - bulk DNA
+        between genes</p></div>
+      <div><h4></h4><p><code>tandem repeat</code> · <code>microsatellite</code> · <code>STR</code> -
+        short-period repeats</p></div>
+      <div><h4></h4><p><code>non-coding RNA</code> · <code>ncRNA</code> · <code>lncRNA</code> - a spliced
+        transcript with no reading frame</p></div>
+      <div><h4>Base composition</h4><p><code>GC-rich</code> / <code>AT-rich</code> / <code>GC 60%</code> -
+        pins the isochore bin the emission tables condition on</p></div>
+      <div><h4>Length</h4><p><code>9000 bp</code> · <code>12 kb</code> · <code>length 3000</code> -
+        up to 60 kb</p></div>
+      <div><h4>Sampling</h4><p><code>conservative</code> / <code>typical</code> / <code>creative</code>,
+        or <code>temperature 0.7</code></p></div>
+    </div>
+  </div>
+
+  <div id="genout" style="display:none">
+    <div class="panel">
+      <h2>Structure the model wrote</h2>
+      <p class="hint" id="genmeta"></p>
+      <canvas id="ribbon" height="68"></canvas>
+      <div class="legend" id="leg"></div>
+      <div class="stats" id="genstats"></div>
+    </div>
+    <div class="panel">
+      <h2>Sequence</h2>
+      <p class="hint">Coloured by the state the model was in when it wrote each base.
+      Start codons and stop codons are boxed; the <b>GT</b>…<b>AG</b> of each intron is underlined.</p>
+      <div class="seqbox" id="seq"></div>
+      <div class="row" style="margin-top:12px">
+        <div style="flex:0 0 auto"><button class="btn sec" id="copyfa">Copy FASTA</button></div>
+        <div style="flex:0 0 auto"><button class="btn sec" id="copygff">Copy annotation (GFF3)</button></div>
+        <div style="flex:0 0 auto"><button class="btn sec" id="sendann">Annotate this sequence →</button></div>
+        <div style="flex:0 0 auto"><button class="btn sec" id="sendmut">Mutation scan →</button></div>
+      </div>
+    </div>
+    <div class="panel" id="protpanel">
+      <h2>Translated reading frame</h2>
+      <p class="hint">The model tracks codon phase across every intron it inserts, so the spliced
+      coding exons concatenate into one open frame.</p>
+      <div class="prot" id="prot"></div>
+      <div class="stats" id="protstats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ANNOTATE ============ -->
+<div class="tab" id="t-ann">
+  <div class="panel">
+    <h2>Give it a sequence</h2>
+    <p class="hint">Paste real or invented DNA. Quill runs forward–backward over its grammar and
+    labels every base, with no reference to any database. Up to 40 kb.</p>
+    <textarea id="inseq" rows="5" placeholder="ACGT… (FASTA headers and whitespace are ignored)"></textarea>
+    <div class="row" style="margin-top:12px">
+      <div style="flex:0 0 auto"><button class="btn" id="goann">Annotate</button></div>
+      <div style="flex:2 1 240px"><label for="locus">or load a real gene from a held-out chromosome</label>
+        <select id="locus"></select></div>
+      <div style="flex:0 0 auto"><button class="btn sec" id="demoann">Load it</button></div>
+    </div>
+  </div>
+  <div id="annout" style="display:none">
+    <div class="panel">
+      <h2>Posterior annotation</h2>
+      <p class="hint" id="annmeta"></p>
+      <div id="truthwrap" style="display:none;margin-bottom:6px">
+        <div class="hint" style="margin-bottom:5px">Reference annotation (Ensembl), for comparison -
+        the model never saw this chromosome:</div>
+        <canvas id="ribbonT" height="30"></canvas>
+      </div>
+      <div class="hint" id="qlab" style="margin-bottom:5px;display:none">Quill's Viterbi decoding:</div>
+      <canvas id="ribbon2" height="68"></canvas>
+      <div class="legend" id="leg2"></div>
+      <div id="agree"></div>
+      <h2 style="margin-top:20px">Surprise per base</h2>
+      <p class="hint">How many bits the model needed for each base. Low regions are ones it finds
+      predictable - repeats, and sequence that fits its grammar.</p>
+      <canvas id="bits" height="110"></canvas>
+      <div class="stats" id="annstats"></div>
+    </div>
+    <div class="panel">
+      <h2>Splice sites found by the matrices alone</h2>
+      <p class="hint">The 176 numbers in Quill's donor and acceptor matrices, scanned directly as
+      log-odds. These same 176 parameters reach AUROC 0.93 at telling real canonical splice sites
+      from ordinary intronic positions in BRCA1.</p>
+      <table id="splicetab"><thead><tr><th>Type</th><th class="num">Position</th><th>Strand</th>
+        <th class="num">Score (bits)</th><th>Site</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MUTATE ============ -->
+<div class="tab" id="t-mut">
+  <div class="panel">
+    <h2>Every possible point mutation, scored</h2>
+    <p class="hint">Quill infers the structure from the sequence you give it, then asks, at each
+    position, how much worse every alternative base would be under that structure. Bright cells are
+    bases the model thinks are constrained. Up to 3 kb.</p>
+    <textarea id="mutseq" rows="4" placeholder="ACGT…"></textarea>
+    <div class="row" style="margin-top:12px">
+      <div style="flex:0 0 auto"><button class="btn" id="gomut">Scan</button></div>
+      <div style="flex:0 0 auto"><button class="btn sec" id="demomut">Load a real exon–intron junction</button></div>
+    </div>
+  </div>
+  <div id="mutout" style="display:none">
+    <div class="panel">
+      <h2 id="mutmeta"></h2>
+      <canvas id="ribbon3" height="54"></canvas>
+      <div class="hm"><canvas id="heat" height="150"></canvas></div>
+      <div class="legend"><span><span class="sw" style="background:#0c1118;border:1px solid var(--line)"></span>0 bits - free to change</span>
+        <span><span class="sw" style="background:#a78bfa"></span>mid</span>
+        <span><span class="sw" style="background:#fde68a"></span>high - strongly constrained</span></div>
+      <div class="stats" id="mutstats"></div>
+      <table id="muttab"><thead><tr><th class="num">Pos</th><th>Change</th><th class="num">Bits lost</th>
+        <th>State the model was in</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ============ GENE FUNCTION (quill-xl2-nano) ============ -->
+<div class="tab" id="t-fn">
+  <div class="panel">
+    <h2>From sequence to function: DNA, RNA and protein</h2>
+    <p class="hint">Paste an mRNA or cDNA (lower-case UTRs are fine) or a protein. The page finds
+      the longest open reading frame, reads the untranslated regions with written RNA knowledge,
+      describes the protein with written physicochemistry, sorting signals, short linear motifs
+      and 1,298 PROSITE patterns, and predicts Gene Ontology terms and EC numbers with
+      quill-xl2-nano: <span id="fnmeta"></span>. No gradient descent anywhere; the same
+      arithmetic as the Python, checked term by term.</p>
+    <div id="fnex" style="margin:8px 0"></div>
+    <textarea id="fnseq" rows="5" spellcheck="false" style="width:100%;font-family:var(--mono);font-size:11px"></textarea>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><button id="fngo">Annotate</button>
+      <span class="hint" id="fninfo"></span></div>
+    <div id="fnmap" style="margin-top:14px"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:10px">
+      <div><h3 style="font-size:13px;margin:0 0 6px">Protein</h3><table><tbody id="fnprot"></tbody></table></div>
+      <div><h3 style="font-size:13px;margin:0 0 6px">mRNA</h3><table><tbody id="fnrna"></tbody></table></div>
+    </div>
+    <h3 style="font-size:13px;margin:16px 0 6px">Predicted function: most specific terms above 30% and at least 1.2&times; their base rate, most enriched first</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div><div class="hint">molecular function</div><table><tbody id="fnmf"></tbody></table></div>
+      <div><div class="hint">biological process</div><table><tbody id="fnbp"></tbody></table></div>
+      <div><div class="hint">cellular component</div><table><tbody id="fncc"></tbody></table></div>
+    </div>
+    <div class="note" id="fnnote"></div>
+  </div>
+</div>
+<!-- ============ ONTOLOGY ============ -->
+<div class="tab" id="t-ont">
+  <div class="panel">
+    <h2>What does this gene do?</h2>
+    <p class="hint">Paste a coding sequence. The written weights score it against ten Gene
+      Ontology slim classes and seven gene families. Nothing was trained: the amino acid
+      composition, N-terminal targeting peptides, repeat periods, transmembrane helix
+      length and coding length of each class were written down from memory, and these are
+      the tables that follow from them.</p>
+    <div id="ontex" style="margin:8px 0"></div>
+    <textarea id="ontseq" rows="4" spellcheck="false"
+      style="width:100%;font-family:var(--mono);font-size:11px"></textarea>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+      <button id="ontgo">Score</button>
+      <label class="hint">weights
+        <select id="ontarm"><option value="k">written</option>
+        <option value="s">counted</option></select></label>
+      <span class="hint" id="ontinfo"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px"
+         id="ontgrid">
+      <div><h3 style="font-size:13px;margin:0 0 6px">Gene Ontology slim</h3>
+        <table><tbody id="onttabgo"></tbody></table></div>
+      <div><h3 style="font-size:13px;margin:0 0 6px">Gene family</h3>
+        <table><tbody id="onttabfam"></tbody></table></div>
+    </div>
+    <div class="note" id="ontnote"></div>
+    <h3 style="font-size:13px;margin:14px 0 6px">Written protein signatures found</h3>
+    <table><thead><tr><th>signature</th><th>implies</th><th class="num">written confidence</th>
+      <th class="num">measured on held-out genes</th></tr></thead><tbody id="sigtab"></tbody></table>
+    <div class="hint" style="margin-top:6px">67 patterns written from memory, each tied to a
+      Gene Ontology term by name. On 3,719 held-out genes, 36 of the 42 that match often
+      enough to test are significant after Bonferroni correction, with median precision
+      0.94. The full model behind the preprint, quill-xl, covers 4,175 GO terms and is
+      too large for this page.</div>
+  </div>
+
+  <div class="panel">
+    <h2>Which kind of RNA is this?</h2>
+    <p class="hint">Paste a non-coding transcript. 260 written parameters &mdash; the box C
+      and D of a C/D snoRNA, the box H and ACA of an H/ACA snoRNA, the Sm site of a
+      spliceosomal snRNA, the tRNA A and B boxes, plus a length, a GC fraction, an exon
+      count and a self-pairing target per class &mdash; decide between ten Sequence
+      Ontology classes.</p>
+    <div id="soex" style="margin:8px 0"></div>
+    <textarea id="soseq" rows="3" spellcheck="false"
+      style="width:100%;font-family:var(--mono);font-size:11px"></textarea>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+      <button id="sogo">Score</button>
+      <label class="hint">exons <input id="soex_n" type="number" value="1" min="1" max="20"
+        style="width:52px"></label>
+      <span class="hint" id="soinfo"></span>
+    </div>
+    <table style="margin-top:12px"><thead><tr><th>Sequence Ontology class</th>
+      <th class="num">SO term</th><th class="num">posterior</th>
+      <th class="num">log2 score</th></tr></thead><tbody id="sotab"></tbody></table>
+    <div class="note" id="sonote"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Write a gene that does a particular job</h2>
+    <p class="hint">Sampling runs the same tables backwards. A collagen comes out with
+      glycine at every third residue, a zinc finger with its cysteines and TGEKP linkers,
+      an olfactory receptor with hydrophobic helices crossing the membrane.</p>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <select id="gencls"></select>
+      <button id="gengo">Generate</button>
+      <span class="hint" id="geninfo"></span>
+    </div>
+    <div id="genprot" style="font-family:var(--mono);font-size:11px;line-height:1.5;
+      margin-top:12px;word-break:break-all"></div>
+    <table style="margin-top:10px"><tbody id="gentab"></tbody></table>
+    <div class="note">Hydrophobic residues are tinted, so a membrane protein shows its
+      helices as blocks rather than as scattered colour.</div>
+  </div>
+</div>
+
+<!-- ============ INSIDE ============ -->
+<!-- ============ 3D VIEWS ============ -->
+<div class="tab" id="t-v3">
+  <div class="panel">
+    <h2>The model in three dimensions</h2>
+    <p class="hint">Live, from the parameters in this page: the model writes a gene, and the three views show
+    the sequence, the grammar that wrote it and what each mutation would cost. Drag to rotate, scroll to zoom.</p>
+    <div class="chips" id="v3-pick" style="margin:10px 0">
+      <button class="btn sec on" data-s="helix">Helix</button>
+      <button class="btn sec" data-s="grammar">Grammar</button>
+      <button class="btn sec" data-s="terrain">Mutation terrain</button>
+      <button class="btn" id="v3-new" style="margin-left:auto">Write another gene</button>
+    </div>
+    <canvas id="v3-canvas" style="width:100%;height:520px;border-radius:10px;border:1px solid var(--line);touch-action:none;cursor:grab;display:block"></canvas>
+    <p class="hint" id="v3-text" style="margin-top:10px"></p>
+    <div class="chips" id="v3-legend"></div>
+  </div>
+</div>
+
+<div class="tab" id="t-ins">
+  <div class="panel">
+    <h2>What the model actually contains</h2>
+    <p class="hint">These are not illustrations. Every curve and letter below is drawn from the
+    parameter blob this page loaded.</p>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h2>Splice donor</h2>
+      <p class="hint">Measured from 822,461 annotated introns. Exon side left of the line, intron right.</p>
+      <canvas id="logo_donor" height="135"></canvas></div>
+    <div class="panel"><h2>Splice acceptor</h2>
+      <p class="hint">The polypyrimidine tract, then the invariant AG.</p>
+      <canvas id="logo_acceptor" height="135"></canvas></div>
+    <div class="panel"><h2>Start codon</h2>
+      <p class="hint">Only complete CDS annotations were counted, so this is clean.</p>
+      <canvas id="logo_atg" height="135"></canvas></div>
+    <div class="panel"><h2>Poly(A) signal</h2>
+      <p class="hint">Found by looking for hexamers enriched at 3′ ends - nobody told it AATAAA.</p>
+      <canvas id="logo_pas" height="135"></canvas></div>
+  </div>
+  <div class="panel"><h2>Codon usage</h2>
+    <p class="hint">Measured over every annotated coding exon on the training chromosomes.</p>
+    <canvas id="codons" height="190"></canvas></div>
+  <div class="grid2">
+    <div class="panel"><h2>Intron length</h2>
+      <p class="hint">The grammar fits two geometric components to this, so sampled genes get both
+      short and very long introns.</p>
+      <canvas id="ilen" height="150"></canvas></div>
+    <div class="panel"><h2>Coding exon length</h2>
+      <canvas id="elen" height="150"></canvas></div>
+  </div>
+  <div class="panel"><h2>How the experts are weighted</h2>
+    <p class="hint">Quill mixes four predictors at every base. The weights were found by EM - 864
+    numbers, the only part of the model fitted by iteration rather than counted. Rows are states,
+    columns are the four experts. Notice the matrices take over completely at splice sites and start
+    codons, and the context model takes over in bulk DNA.</p>
+    <canvas id="mixheat" height="330"></canvas>
+    <div class="legend"><span>columns: <b>context model</b> · <b>matrix / class table</b> ·
+      <b>codon model</b> · <b>uniform</b></span></div></div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<div class="tab" id="t-abt">
+  <div class="panel">
+    <h2>What a model this small does and does not know</h2>
+    <p class="hint" style="font-size:13px">Measured on chromosomes that were never counted.</p>
+    <table><thead><tr><th>Task</th><th class="num">quill-k (10 k, written)</th>
+      <th class="num">quill-s (1.4 M)</th><th class="num">quill-l (67 M)</th>
+      <th class="num">For comparison</th></tr></thead><tbody id="abttab"></tbody></table>
+    <div class="note" id="abtnote"></div>
+  </div>
+</div>
+
+<footer class="wrap">
+  <p>Quill-S: <span id="fparam"></span> parameters, <span id="fsize"></span> in this page.
+  Built by counting GRCh38 (Ensembl r91) on chromosomes 1–16, 18, X, Y, MT.
+  Nothing on chromosomes 17, 19, 20, 21, 22 or any mouse sequence was used to set a parameter.</p>
+</footer>
+</div>
+
+<script src="demo-loci.js"></script>
+<script src="quill-k-model.js"></script>
+<script>window.QUILL_K = window.QUILL; window.QUILL = null;</script>
+<script src="quill-s-model.js"></script>
+<script>window.QUILL_S = window.QUILL;</script>
+<script src="quill-ontology.js"></script>
+<script src="quill-ont-examples.js"></script>
+<script src="quill-signatures.js"></script>
+<script src="quill-xl-nano.js"></script>
+<script src="quill-xl-examples.js"></script>
+<script src="quill-engine.js"></script>
+<script src="quill-ontology-engine.js"></script>
+<script src="quill-xl-engine.js"></script>
+<script>
+/* Two browser-sized models: quill-k is written from knowledge alone, quill-s adds
+   counted tables over the same grammar. Both run the identical engine. */
+const MODELS = {
+  'quill-k': {meta: window.QUILL_K, label: 'quill-k \u00b7 written',
+              human: 1.9252, mouse: 1.9223, provenance: 'written from knowledge, 0 bases counted'},
+  'quill-s': {meta: window.QUILL_S, label: 'quill-s \u00b7 counted',
+              human: 1.7560, mouse: 1.9043, provenance: '2.65 Gb counted, same written grammar'}
+};
+let CURRENT = 'quill-s';
+let Qu = window.QuillInit(MODELS[CURRENT].meta);
+let META = MODELS[CURRENT].meta;
+const RIBC = {}, RIBN = Qu.ribbonNames;
+RIBN.forEach(n => RIBC[n] = getComputedStyle(document.documentElement).getPropertyValue('--c-' + n).trim() || '#888');
+const PRETTY = {intergenic:'intergenic', cpg_island:'CpG island', tandem:'tandem repeat',
+  utr5:"5′ UTR", cds:'coding exon', intron:'intron', splice:'splice site', utr3:"3′ UTR",
+  ncrna:'ncRNA exon', polya:'poly(A) signal', start:'start codon', stop:'stop codon'};
+const AA = {};
+(function(){ const t='FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';
+  const o='TCAG'; let k=0;
+  for(const a of o) for(const b of o) for(const c of o) AA[a+b+c]=t[k++]; })();
+
+/* ---------- header ---------- */
+function renderHeader() {
+  const m = MODELS[CURRENT], np = META.nparam.total;
+  const sizeKB = META.blob_bytes / 1024;
+  const opts = Object.keys(MODELS).map(k =>
+    `<option value="${k}"${k === CURRENT ? ' selected' : ''}>${MODELS[k].label}</option>`).join('');
+  document.getElementById('hdr').innerHTML =
+    `<span class="chip">model <select id="modelsel" style="font:inherit;color:inherit;background:transparent;border:0">${opts}</select></span>` +
+    [['parameters', np.toLocaleString()],
+//     ['in this page', sizeKB < 900 ? sizeKB.toFixed(1) + ' KB' : (sizeKB/1024).toFixed(2) + ' MB'],
+     ['context order', META.order],
+//     ['weights', m.provenance],
+     ['held-out human', m.human.toFixed(4) + ' bits/base'],
+     ['held-out mouse', m.mouse.toFixed(4) + ' bits/base'],
+//     ['gradient steps', '0']
+    ].map(([k,v]) => `<span class="chip">${k} <b>${v}</b></span>`).join('');
+  document.getElementById('fparam').textContent = np.toLocaleString();
+  document.getElementById('modelsel').onchange = e => switchModel(e.target.value);
+}
+function switchModel(key) {
+  if (key === CURRENT || !MODELS[key]) return;
+  CURRENT = key;
+  META = MODELS[key].meta;
+  Qu = window.QuillInit(META);
+  renderHeader();
+  if (typeof refreshPanels === 'function') refreshPanels();
+}
+renderHeader();
+document.getElementById('fsize').textContent = (META.blob_bytes/1e6).toFixed(2) + ' MB';
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('nav button').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById('t-' + b.dataset.t).classList.add('on');
+  if (b.dataset.t === 'ins') drawInside();
+  if (b.dataset.t === 'v3') Quill3D.open();
+});
+
+/* ---------- prompt parsing ---------- */
+const INTENTS = [
+  {k:'gene', state:'UTR5', re:/(protein[- ]?coding|coding gene|\bgene\b|\bexon|\bcds\b|protein)/i,
+   label:'protein-coding gene', note:'starts at a transcription start site and runs until a stop codon'},
+  {k:'cpg', state:'CGI', re:/(cpg|promoter|island|\btss\b)/i,
+   label:'CpG island / promoter', note:'CpG-rich island state'},
+  {k:'ncrna', state:'NCRNA', re:/(non[- ]?coding|ncrna|lncrna|\brna\b|lincrna)/i,
+   label:'non-coding RNA', note:'spliced transcript with no reading frame'},
+  {k:'tandem', state:'TANDEM', re:/(tandem|microsat|\bstr\b|satellite|repeat)/i,
+   label:'tandem repeat', note:'short-period repeat state'},
+  {k:'ig', state:'IG', re:/(intergenic|junk|background|random|between genes|non[- ]?gene)/i,
+   label:'intergenic DNA', note:'bulk sequence between genes'}
+];
+function parsePrompt(txt) {
+  const p = {intent:null, gc:-1, len:null, temp:1.0, unknown:[], gcWord:null, tempWord:null};
+  for (const it of INTENTS) if (it.re.test(txt)) { p.intent = it; break; }
+  let m;
+  if ((m = txt.match(/gc[^0-9]{0,6}(\d{2})\s*(?:%|percent)/i))) {
+    const v = +m[1] / 100;
+    p.gc = v < 0.42 ? 0 : (v < 0.52 ? 1 : 2); p.gcWord = 'GC ' + m[1] + '%';
+  } else if (/gc[- ]?rich|high[- ]?gc|\bgc\b/i.test(txt)) { p.gc = 2; p.gcWord = 'GC-rich'; }
+  else if (/at[- ]?rich|low[- ]?gc|\bat\b/i.test(txt)) { p.gc = 0; p.gcWord = 'AT-rich'; }
+  if ((m = txt.match(/(\d+(?:\.\d+)?)\s*kb/i))) p.len = Math.round(parseFloat(m[1]) * 1000);
+  else if ((m = txt.match(/(\d{3,6})\s*(?:bp|bases|nt|b\b)?/i))) p.len = +m[1];
+  if ((m = txt.match(/temp(?:erature)?[^0-9]{0,6}(\d*\.?\d+)/i))) {
+    p.temp = Math.min(2, Math.max(0.3, parseFloat(m[1]))); p.tempWord = 'temperature ' + p.temp;
+  } else if (/conservative|likely|typical consensus|sharp/i.test(txt)) { p.temp = 0.7; p.tempWord = 'conservative'; }
+  else if (/creative|diverse|varied|wild|random-ish/i.test(txt)) { p.temp = 1.25; p.tempWord = 'creative'; }
+  if (!p.len) p.len = p.intent && p.intent.k === 'gene' ? 9000 : 2000;
+  p.len = Math.min(60000, Math.max(120, p.len));
+  return p;
+}
+/* The GC bin switches which measured emission tables are used, but the context
+   model is shared across bins, so asking for GC-rich DNA on its own moves the
+   realised GC only a little. This adds a logit tilt on G/C at decode time,
+   calibrated so the expected composition matches the measured GC of that bin. */
+function gcTilt(bin) {
+  if (bin < 0) return 0;
+  const g = Qu.binGC, t = g[bin], m = (g[0] + g[1] + g[2]) / 3;
+  return Math.log((t / (1 - t)) / (m / (1 - m)));
+}
+function showParse(p) {
+  const rows = [];
+  rows.push(`<span class="k">make</span> <span class="${p.intent ? 'v' : 'unk'}">` +
+    (p.intent ? p.intent.label : 'nothing recognised - defaulting to intergenic DNA') + '</span>' +
+    (p.intent ? ` <span style="color:var(--ink3)">· ${p.intent.note}</span>` : ''));
+  rows.push(`<span class="k">start state</span> <span class="v">${p.intent ? p.intent.state : 'IG'}</span>`);
+  rows.push(`<span class="k">length</span> <span class="v">${p.len.toLocaleString()} bp</span>`);
+  rows.push(`<span class="k">GC bin</span> <span class="v">${p.gc < 0 ? 'let the model drift' :
+    ['low (<42%)','mid (42–52%)','high (>52%)'][p.gc]}</span>` +
+    (p.gcWord ? ` <span style="color:var(--ink3)">· from "${p.gcWord}"</span>` : ''));
+  rows.push(`<span class="k">temperature</span> <span class="v">${p.temp}</span>` +
+    (p.tempWord ? ` <span style="color:var(--ink3)">· from "${p.tempWord}"</span>` : ''));
+  if (p.gc >= 0) {
+    const f = Math.exp(gcTilt(p.gc));
+    rows.push(`<span class="k">composition steering</span> <span class="v">×${f.toFixed(2)} on G and C</span>` +
+      ` <span style="color:var(--ink3)">· a decode-time tilt, not a model parameter: calibrated so the` +
+      ` expected GC matches the ${(100 * Qu.binGC[p.gc]).toFixed(0)}% measured for this bin</span>`);
+  }
+  document.getElementById('parse').innerHTML = rows.join('<br>');
+}
+const EXAMPLES = ['a protein-coding gene, GC-rich, 9000 bp', 'CpG island promoter, 1500 bp',
+  'intergenic DNA, AT-rich, 4 kb', 'a tandem repeat, 600 bp',
+  'non-coding RNA, 6 kb', 'a protein-coding gene, conservative, 20 kb'];
+document.getElementById('examples').innerHTML =
+  EXAMPLES.map(e => `<button data-p="${e}">${e}</button>`).join('');
+document.querySelectorAll('#examples button').forEach(b => b.onclick = () => {
+  document.getElementById('prompt').value = b.dataset.p;
+  showParse(parsePrompt(b.dataset.p)); run();
+});
+document.getElementById('prompt').oninput = e => showParse(parsePrompt(e.target.value));
+showParse(parsePrompt(document.getElementById('prompt').value));
+
+/* ---------- drawing helpers ---------- */
+function fit(c) {
+  const r = window.devicePixelRatio || 1, w = c.clientWidth;
+  c.width = Math.max(1, Math.round(w * r)); c.height = Math.round(c.height ? c.height : 80);
+  if (c.dataset.h) c.height = Math.round((+c.dataset.h) * r);
+  else { c.dataset.h = c.getAttribute('height'); c.height = Math.round((+c.dataset.h) * r); }
+  c.style.height = c.dataset.h + 'px';
+  const x = c.getContext('2d'); x.setTransform(r, 0, 0, r, 0, 0);
+  return {x: x, w: w, h: +c.dataset.h};
+}
+function drawRibbon(cid, path, n) {
+  const c = document.getElementById(cid), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h);
+  const top = 14, bh = 30;
+  x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  for (let px = 0; px < Math.ceil(w); px++) {
+    const a = Math.floor(px / w * n), b = Math.max(a + 1, Math.floor((px + 1) / w * n));
+    const cnt = {};
+    for (let t = a; t < b && t < n; t++) { const r = RIBN[Qu.ribbon[path[t]]]; cnt[r] = (cnt[r] || 0) + 1; }
+    // a pixel covering many bases shows the most informative class present
+    const order = ['start','stop','splice','cds','polya','utr5','utr3','ncrna','cpg_island','tandem','intron','intergenic'];
+    let pick = 'intergenic';
+    for (const o of order) if (cnt[o]) { pick = o; break; }
+    x.fillStyle = RIBC[pick]; x.fillRect(px, top, 1, bh);
+  }
+  x.fillStyle = '#6b7d99'; x.font = '10px JetBrains Mono, monospace';
+  const ticks = 6;
+  for (let i = 0; i <= ticks; i++) {
+    const px = i / ticks * w, bp = Math.round(i / ticks * n);
+    x.fillRect(Math.min(px, w - 1), top + bh, 1, 4);
+    const lab = bp >= 1000 ? (bp / 1000).toFixed(1) + ' kb' : bp + ' bp';
+    x.textAlign = i === 0 ? 'left' : (i === ticks ? 'right' : 'center');
+    x.fillText(lab, Math.min(Math.max(px, 2), w - 2), top + bh + 15);
+  }
+  x.textAlign = 'left';
+}
+function legend(elid, path, n) {
+  const seen = new Set();
+  for (let t = 0; t < n; t++) seen.add(RIBN[Qu.ribbon[path[t]]]);
+  const order = ['intergenic','cpg_island','tandem','utr5','start','cds','splice','intron','stop','utr3','polya','ncrna'];
+  document.getElementById(elid).innerHTML = order.filter(o => seen.has(o))
+    .map(o => `<span><span class="sw" style="background:${RIBC[o]}"></span>${PRETTY[o]}</span>`).join('');
+}
+function lineChart(cid, vals, color, label, maxv) {
+  const c = document.getElementById(cid), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  const n = vals.length, pad = 22, hh = h - pad - 8;
+  let mx = maxv || 0;
+  if (!maxv) for (let i = 0; i < n; i++) if (vals[i] > mx) mx = vals[i];
+  mx = mx || 1;
+  x.strokeStyle = '#1e2838'; x.lineWidth = 1;
+  for (let g = 0; g <= 2; g++) { const y = 8 + hh * g / 2; x.beginPath(); x.moveTo(0, y); x.lineTo(w, y); x.stroke(); }
+  x.strokeStyle = color; x.lineWidth = 1.2; x.beginPath();
+  const step = Math.max(1, Math.floor(n / (w * 2)));
+  let first = true;
+  for (let px = 0; px < w; px++) {
+    const a = Math.floor(px / w * n), b = Math.max(a + 1, Math.floor((px + 1) / w * n));
+    let s = 0, k = 0;
+    for (let t = a; t < b && t < n; t += step) { s += vals[t]; k++; }
+    const v = k ? s / k : 0, y = 8 + hh * (1 - Math.min(v / mx, 1));
+    if (first) { x.moveTo(px, y); first = false; } else x.lineTo(px, y);
+  }
+  x.stroke();
+  x.fillStyle = '#6b7d99'; x.font = '10px JetBrains Mono, monospace';
+  x.fillText(label + '  (0 – ' + mx.toFixed(1) + ')', 4, h - 5);
+}
+
+/* ---------- sequence rendering ---------- */
+function renderSeq(elid, seq, path, perLine) {
+  perLine = perLine || 60;
+  const CAP = 12000;
+  let note = '';
+  if (seq.length > CAP) {
+    note = `<div style="color:var(--c-tandem);margin-bottom:8px">showing the first ${CAP.toLocaleString()} of ${seq.length.toLocaleString()} bases</div>`;
+    seq = seq.slice(0, CAP); path = path.slice(0, CAP);
+  }
+  const n = seq.length, txt = Qu.decode(seq);
+  let html = '', cur = null, open = false;
+  const STATE = Qu.stateNames;
+  for (let i = 0; i < n; i++) {
+    if (i % perLine === 0) {
+      if (open) { html += '</span>'; open = false; cur = null; }
+      html += (i ? '\n' : '') + `<span class="n">${String(i + 1).padStart(6, ' ')}  </span>`;
+    }
+    const r = RIBN[Qu.ribbon[path[i]]];
+    const nm = STATE[path[i]];
+    let deco = '';
+    if (r === 'start' || r === 'stop') deco = ';border:1px solid currentColor;border-radius:2px';
+    if (/^DON\d?_?[34]$|^DONnc_[34]$/.test(nm) || /^ACC\d?_1[89]$|^ACCnc_1[89]$/.test(nm))
+      deco = ';text-decoration:underline;text-decoration-thickness:2px';
+    const key = r + deco;
+    if (key !== cur) {
+      if (open) html += '</span>';
+      html += `<span style="color:${RIBC[r]}${deco}" title="${nm}">`;
+      cur = key; open = true;
+    }
+    html += txt[i];
+  }
+  if (open) html += '</span>';
+  document.getElementById(elid).innerHTML = note + html;
+}
+function statCards(elid, items) {
+  document.getElementById(elid).innerHTML = items.map(([l, v, s]) =>
+    `<div class="stat"><div class="l">${l}</div><div class="v">${v}${s ? ' <small>' + s + '</small>' : ''}</div></div>`).join('');
+}
+
+/* ---------- generation ---------- */
+let LAST = null;
+function run() {
+  const p = parsePrompt(document.getElementById('prompt').value);
+  showParse(p);
+  const btn = document.getElementById('go');
+  btn.disabled = true; btn.textContent = 'writing…';
+  setTimeout(() => {
+    const t0 = performance.now();
+    const start = META.idx[p.intent ? p.intent.state : 'IG'];
+    let pathres;
+    if (p.intent && p.intent.k === 'gene') pathres = Qu.samplePathGene(start, p.len, 600);
+    else pathres = {path: Qu.samplePath(start, p.len), tries: 1, complete: true};
+    const noStop = document.getElementById('nostop').checked;
+    const g = Qu.generateAlongPath(pathres.path, p.temp, p.gc, noStop, gcTilt(p.gc));
+    const ms = performance.now() - t0;
+    LAST = g;
+    document.getElementById('genout').style.display = 'block';
+    const nm = Qu.stateNames;
+    let cds = 0, intr = 0, nint = 0, nex = 0, pas = 0, atg = 0, stp = 0;
+    for (let i = 0; i < g.path.length; i++) {
+      const g3 = Qu.grp3[g.path[i]];
+      if (g3 === 1) cds++; if (g3 === 2) intr++;
+      if (nm[g.path[i]] === 'DON0_0' || nm[g.path[i]] === 'DON1_0' || nm[g.path[i]] === 'DON2_0' ||
+          nm[g.path[i]] === 'DONnc_0') { nint++; nex++; }
+      if (nm[g.path[i]] === 'PAS0') pas++;
+      if (nm[g.path[i]] === 'ATG0') atg++;
+      if (nm[g.path[i]] === 'STOP0') stp++;
+    }
+    const s = g.seq;
+    let gc = 0, cg = 0, nc = 0, ng = 0;
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] === 1) { gc++; nc++; if (s[i + 1] === 2) cg++; }
+      else if (s[i] === 2) { gc++; ng++; }
+    }
+    const oe = (cg / s.length) / ((nc / s.length) * (ng / s.length) || 1);
+    document.getElementById('genmeta').innerHTML =
+      `${p.len.toLocaleString()} bp written in <b>${ms.toFixed(0)} ms</b>` +
+      (p.intent && p.intent.k === 'gene'
+        ? ` · sampled <b>${pathres.tries}</b> candidate gene ${pathres.tries === 1 ? 'structure' : 'structures'} to find one that finishes inside ${p.len.toLocaleString()} bp` +
+          (pathres.complete ? '' : ' · <span style="color:var(--c-tandem)">none finished in that length - showing the closest attempt; try a longer prompt</span>')
+        : '');
+    drawRibbon('ribbon', g.path, g.path.length);
+    legend('leg', g.path, g.path.length);
+    statCards('genstats', [
+      ['length', g.seq.length.toLocaleString(), 'bp'],
+      ['GC', (100 * gc / s.length).toFixed(1), '%'],
+      ['CpG obs/exp', oe.toFixed(2), ''],
+      ['coding bases', cds.toLocaleString(), (100 * cds / s.length).toFixed(1) + '%'],
+      ['intron bases', intr.toLocaleString(), (100 * intr / s.length).toFixed(1) + '%'],
+      ['introns', nint, ''], ['start codons', atg, ''], ['stop codons', stp, ''],
+      ['poly(A) signals', pas, '']
+    ]);
+    renderSeq('seq', g.seq, g.path);
+    protein(g);
+    btn.disabled = false; btn.textContent = 'Generate';
+  }, 10);
+}
+function protein(g) {
+  const nm = Qu.stateNames, codons = [];
+  let buf = [], ok = true, expect = 0;
+  for (let i = 0; i < g.path.length; i++) {
+    const p = g.path[i], n = nm[p];
+    // every coding base carries a codon phase, including the three exon bases
+    // inside each donor and acceptor pipeline
+    // grp3 === 1 is exactly the coding-base set: CDS, start, stop, and the three
+    // exon bases inside each donor and acceptor pipeline. Intron states also carry
+    // a phase (the phase to resume at), so phase alone is not the test.
+    const st = /^STOP([012])$/.exec(n);
+    const ph = st ? +st[1] : Qu.state_phase[p];
+    if (Qu.grp3[p] === 1 && ph >= 0) {
+      if (ph !== expect) ok = false;
+      expect = (ph + 1) % 3;
+      buf.push(g.seq[i]);
+      if (buf.length === 3) { codons.push(buf.map(b => 'ACGT'[b]).join('')); buf = []; }
+    }
+  }
+  window.__frameOK = ok;
+  const el = document.getElementById('protpanel');
+  if (codons.length < 2) { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  let aas = '', stops = 0, bad = 0;
+  codons.forEach((c, i) => {
+    const a = AA[c] || '?';
+    if (a === '*') { stops++; aas += `<span class="s">*</span>`; }
+    else if (i === 0 && a === 'M') aas += `<span class="m">M</span>`;
+    else { aas += a; if (a === '?') bad++; }
+  });
+  document.getElementById('prot').innerHTML = aas;
+  const internal = Math.max(0, stops - (AA[codons[codons.length - 1]] === '*' ? 1 : 0));
+  statCards('protstats', [
+    ['codons', codons.length.toLocaleString(), ''],
+    ['protein length', (codons.length - (AA[codons[codons.length - 1]] === '*' ? 1 : 0)), 'aa'],
+    ['starts with M', codons[0] === 'ATG' ? 'yes' : 'no', ''],
+    ['ends with stop', AA[codons[codons.length - 1]] === '*' ? 'yes' : 'no', ''],
+    ['premature stops', internal, internal ? 'in-frame stop' : 'none'],
+    ['codon phase', window.__frameOK ? 'consistent' : 'broken', 'across every intron']
+  ]);
+}
+document.getElementById('go').onclick = run;
+document.getElementById('prompt').onkeydown = e => { if (e.key === 'Enter') run(); };
+
+/* ---------- copy ---------- */
+async function copy(txt, btn) {
+  const old = btn.textContent;
+  try { await navigator.clipboard.writeText(txt); btn.textContent = 'copied'; }
+  catch (e) { btn.textContent = 'copy blocked - select the text instead'; }
+  setTimeout(() => btn.textContent = old, 1800);
+}
+document.getElementById('copyfa').onclick = e => {
+  if (!LAST) return;
+  const s = Qu.decode(LAST.seq), lines = [];
+  for (let i = 0; i < s.length; i += 70) lines.push(s.slice(i, i + 70));
+  copy('>quill_generated len=' + s.length + '\n' + lines.join('\n'), e.target);
+};
+document.getElementById('copygff').onclick = e => {
+  if (!LAST) return;
+  const nm = Qu.stateNames, out = ['##gff-version 3'];
+  let cur = null, st = 0;
+  for (let i = 0; i <= LAST.path.length; i++) {
+    const r = i < LAST.path.length ? RIBN[Qu.ribbon[LAST.path[i]]] : null;
+    if (r !== cur) {
+      if (cur && cur !== 'intergenic')
+        out.push(['quill_generated', 'Quill', cur, st + 1, i, '.', '+', '.', 'ID=' + cur + '_' + st].join('\t'));
+      cur = r; st = i;
+    }
+  }
+  copy(out.join('\n'), e.target);
+};
+document.getElementById('sendann').onclick = () => {
+  document.getElementById('inseq').value = Qu.decode(LAST.seq).slice(0, 40000);
+  document.querySelector('nav button[data-t=ann]').click(); goAnn();
+};
+document.getElementById('sendmut').onclick = () => {
+  const nm = Qu.stateNames;
+  let c = Math.max(0, LAST.path.findIndex(p => Qu.grp3[p] === 1) - 400);
+  document.getElementById('mutseq').value = Qu.decode(LAST.seq).slice(c, c + 1400);
+  document.querySelector('nav button[data-t=mut]').click(); goMut();
+};
+
+/* ---------- annotate ---------- */
+let TRUTH = null;
+const LOCI = window.QUILL_LOCI || [];
+document.getElementById('locus').innerHTML = LOCI.map((l, i) =>
+  `<option value="${i}">${l.gene || l.transcript} - ${l.chrom}:${l.start.toLocaleString()} (${l.strand}) · ${(l.seq.length / 1000).toFixed(0)} kb</option>`).join('');
+function truthTrack(l) {
+  const n = l.seq.length, t = new Uint8Array(n);
+  for (const [a, b] of l.exons) for (let i = Math.max(0, a); i < Math.min(n, b); i++) t[i] = 3;
+  const lo = Math.max(0, l.exons[0][0]), hi = Math.min(n, l.exons[l.exons.length - 1][1]);
+  for (let i = lo; i < hi; i++) if (t[i] === 0) t[i] = 2;
+  for (const [a, b] of l.cds) for (let i = Math.max(0, a); i < Math.min(n, b); i++) t[i] = 1;
+  return t;
+}
+function drawTruth(cid, t, flip) {
+  const c = document.getElementById(cid), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  const n = t.length, COL = ['#5a6b85', '#34d399', '#3b4a63', '#60a5fa'];
+  for (let px = 0; px < Math.ceil(w); px++) {
+    const a = Math.floor(px / w * n), b = Math.max(a + 1, Math.floor((px + 1) / w * n));
+    let best = 0;
+    for (let i = a; i < b && i < n; i++) {
+      const v = t[flip ? n - 1 - i : i];
+      if (v === 1) { best = 1; break; }
+      if (v > best) best = v;
+    }
+    x.fillStyle = COL[best]; x.fillRect(px, 6, 1, h - 12);
+  }
+}
+function cleanSeq(v, cap) {
+  const s = v.replace(/^>.*$/gm, '').replace(/[^ACGTUNacgtun]/g, '');
+  return Qu.encode(s.slice(0, cap));
+}
+function goAnn() {
+  const seq = cleanSeq(document.getElementById('inseq').value, 40000);
+  if (seq.length < 40) { alertish('inseq', 'Give it at least 40 bases.'); return; }
+  const btn = document.getElementById('goann');
+  btn.disabled = true; btn.textContent = 'annotating…';
+  setTimeout(() => {
+    const t0 = performance.now();
+    const gcb = Qu.gcBins(seq);
+    const path = Qu.viterbi(seq, gcb);
+    const post = Qu.posterior(seq, gcb);
+    const ms = performance.now() - t0;
+    document.getElementById('annout').style.display = 'block';
+    document.getElementById('annmeta').innerHTML = TRUTH
+      ? `Real sequence: <b>${TRUTH.locus.gene || TRUTH.locus.transcript}</b>, ${TRUTH.locus.chrom}:${TRUTH.locus.start.toLocaleString()}–${TRUTH.locus.end.toLocaleString()} (${TRUTH.locus.assembly}), strand ${TRUTH.locus.strand}, shown in transcriptional orientation. This chromosome was held out of every count.`
+      : `${seq.length.toLocaleString()} bases, decoded with forward–backward over ${META.nstate} states.`;
+    document.getElementById('qlab').style.display = TRUTH ? 'block' : 'none';
+    document.getElementById('truthwrap').style.display = TRUTH ? 'block' : 'none';
+    if (TRUTH) drawTruth('ribbonT', TRUTH.track, TRUTH.flip);
+    drawRibbon('ribbon2', path, path.length);
+    legend('leg2', path, path.length);
+    if (TRUTH && TRUTH.track.length === seq.length) {
+      let tp = 0, fp = 0, fn = 0;
+      for (let i = 0; i < seq.length; i++) {
+        const tc = TRUTH.track[TRUTH.flip ? seq.length - 1 - i : i] === 1;
+        const pc = Qu.grp3[path[i]] === 1;
+        if (pc && tc) tp++; else if (pc) fp++; else if (tc) fn++;
+      }
+      document.getElementById('agree').innerHTML =
+        `<div class="note">Against the reference annotation of this locus, Quill recovered
+         <b>${(100 * tp / Math.max(tp + fn, 1)).toFixed(0)}%</b> of the coding bases
+         (${tp.toLocaleString()} of ${(tp + fn).toLocaleString()}); of what it called coding,
+         <b>${(100 * tp / Math.max(tp + fp, 1)).toFixed(0)}%</b> really is. It was given nothing
+         but the sequence.</div>`;
+    } else document.getElementById('agree').innerHTML = '';
+    lineChart('bits', post.bits, '#5eead4', 'bits per base', 4);
+    let cds = 0, intr = 0, nv = 0, tot = 0;
+    for (let i = 0; i < seq.length; i++) {
+      if (Qu.grp3[path[i]] === 1) cds++; if (Qu.grp3[path[i]] === 2) intr++;
+      if (seq[i] <= 3) { nv++; tot += post.bits[i]; }
+    }
+    statCards('annstats', [
+      ['length', seq.length.toLocaleString(), 'bp'],
+      ['bits / base', (tot / nv).toFixed(3), ''],
+      ['coding (Viterbi)', (100 * cds / seq.length).toFixed(2), '%'],
+      ['intron (Viterbi)', (100 * intr / seq.length).toFixed(1), '%'],
+      ['decoded in', ms.toFixed(0), 'ms']
+    ]);
+    spliceTable(seq);
+    btn.disabled = false; btn.textContent = 'Annotate';
+  }, 10);
+}
+function spliceTable(seq) {
+  const rows = [];
+  for (const [kind, key, hot] of [['donor', 'donor', 3], ['acceptor', 'acceptor', 18]]) {
+    const M = Qu.matrixLogOdds(key);
+    for (const strand of ['+', '-']) {
+      const s = strand === '+' ? seq : Qu.revcomp(seq);
+      const sc = Qu.scanMatrix(s, M);
+      for (let i = 0; i < sc.length; i++) if (sc[i] > 6) {
+        const pos = strand === '+' ? i + hot : seq.length - (i + hot) - 1;
+        rows.push([kind, pos + 1, strand, sc[i],
+          Qu.decode(s.slice(i, i + M.length))]);
+      }
+    }
+  }
+  rows.sort((a, b) => b[3] - a[3]);
+  document.querySelector('#splicetab tbody').innerHTML = rows.slice(0, 14).map(r =>
+    `<tr><td>${r[0]}</td><td class="num">${r[1].toLocaleString()}</td><td>${r[2]}</td>
+     <td class="num">${r[3].toFixed(1)}</td><td class="mono" style="font-size:11px">${r[4]}</td></tr>`).join('')
+    || '<tr><td colspan="5" style="color:var(--ink3)">no site scored above 6 bits</td></tr>';
+}
+document.getElementById('goann').onclick = goAnn;
+document.getElementById('demoann').onclick = () => {
+  const l = LOCI[+document.getElementById('locus').value || 0];
+  if (!l) return;
+  const fwd = l.strand === '+';
+  document.getElementById('inseq').value = fwd ? l.seq
+    : Qu.decode(Qu.revcomp(Qu.encode(l.seq)));
+  TRUTH = {track: truthTrack(l), flip: !fwd, locus: l};
+  goAnn();
+};
+document.getElementById('inseq').oninput = () => { TRUTH = null; };
+function alertish(id, msg) {
+  const el = document.getElementById(id);
+  el.style.borderColor = 'var(--c-stop)';
+  el.placeholder = msg;
+  setTimeout(() => el.style.borderColor = '', 1600);
+}
+
+/* ---------- mutate ---------- */
+function goMut() {
+  const seq = cleanSeq(document.getElementById('mutseq').value, 3000);
+  if (seq.length < 40) { alertish('mutseq', 'Give it at least 40 bases.'); return; }
+  const btn = document.getElementById('gomut');
+  btn.disabled = true; btn.textContent = 'scanning…';
+  setTimeout(() => {
+    const t0 = performance.now();
+    const gcb = Qu.gcBins(seq);
+    const r = Qu.mutationScan(seq, gcb);
+    const path = Qu.viterbi(seq, gcb);
+    const ms = performance.now() - t0;
+    document.getElementById('mutout').style.display = 'block';
+    document.getElementById('mutmeta').textContent =
+      `${seq.length.toLocaleString()} bases × 3 alternatives = ${(seq.length * 3).toLocaleString()} substitutions, scored in ${ms.toFixed(0)} ms`;
+    drawRibbon('ribbon3', path, path.length);
+    heat(seq, r.scores);
+    let mx = 0, sum = 0, nz = 0;
+    const flat = [];
+    for (let t = 0; t < seq.length; t++) for (let x = 0; x < 4; x++) {
+      if (x === seq[t]) continue;
+      const v = r.scores[t * 4 + x];
+      if (v > mx) mx = v;
+      sum += v; nz++;
+      flat.push([t, x, v]);
+    }
+    flat.sort((a, b) => b[2] - a[2]);
+    statCards('mutstats', [
+      ['substitutions', (seq.length * 3).toLocaleString(), ''],
+      ['mean bits lost', (sum / nz).toFixed(2), ''],
+      ['worst substitution', mx.toFixed(1), 'bits'],
+      ['above 4 bits', flat.filter(f => f[2] > 4).length.toLocaleString(), '']
+    ]);
+    document.querySelector('#muttab tbody').innerHTML = flat.slice(0, 12).map(([t, x, v]) =>
+      `<tr><td class="num">${t + 1}</td><td class="mono">${'ACGT'[seq[t]]}→${'ACGT'[x]}</td>
+       <td class="num">${v.toFixed(2)}</td><td style="color:${RIBC[RIBN[Qu.ribbon[path[t]]]]}">
+       ${PRETTY[RIBN[Qu.ribbon[path[t]]]]} <span style="color:var(--ink3)">(${Qu.stateNames[path[t]]})</span></td></tr>`).join('');
+    btn.disabled = false; btn.textContent = 'Scan';
+  }, 10);
+}
+function heat(seq, sc) {
+  const c = document.getElementById('heat');
+  const n = seq.length, cw = Math.max(2, Math.min(9, Math.floor(1040 / n)));
+  c.style.width = Math.max(n * cw, 300) + 'px';
+  const r = window.devicePixelRatio || 1;
+  c.width = Math.max(n * cw, 300) * r; c.height = 150 * r;
+  const x = c.getContext('2d'); x.setTransform(r, 0, 0, r, 0, 0);
+  const w = Math.max(n * cw, 300);
+  x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, 150);
+  const top = 22, rh = 26;
+  let mx = 1;
+  for (let i = 0; i < n * 4; i++) if (sc[i] > mx) mx = sc[i];
+  for (let t = 0; t < n; t++) for (let b = 0; b < 4; b++) {
+    const v = b === seq[t] ? -1 : Math.max(0, sc[t * 4 + b]) / mx;
+    if (v < 0) { x.fillStyle = '#1b2433'; }
+    else {
+      const u = Math.pow(v, 0.65);
+      const col = u < 0.5 ? [40 + u * 2 * 90, 50 + u * 2 * 40, 90 + u * 2 * 110]
+                          : [130 + (u - 0.5) * 2 * 123, 90 + (u - 0.5) * 2 * 134, 200 + (u - 0.5) * 2 * 10];
+      x.fillStyle = `rgb(${col[0] | 0},${col[1] | 0},${col[2] | 0})`;
+    }
+    x.fillRect(t * cw, top + b * rh, Math.max(1, cw - 0.5), rh - 1);
+  }
+  x.fillStyle = '#9aabc4'; x.font = '11px JetBrains Mono, monospace';
+  for (let b = 0; b < 4; b++) x.fillText('ACGT'[b], 2, top + b * rh + 17);
+  x.fillStyle = '#6b7d99'; x.font = '10px JetBrains Mono, monospace';
+  x.fillText('alternative base  ·  brighter = more bits lost  ·  grey = the base that is there  ·  max ' + mx.toFixed(1) + ' bits', 16, 13);
+}
+document.getElementById('gomut').onclick = goMut;
+document.getElementById('demomut').onclick = () => {
+  const l = LOCI[0];
+  if (!l) return;
+  const fwd = l.strand === '+';
+  const sq = fwd ? l.seq : Qu.decode(Qu.revcomp(Qu.encode(l.seq)));
+  const n = l.seq.length;
+  // centre on a real internal coding exon with the intron on each side
+  const mid = l.cds[Math.floor(l.cds.length / 2)];
+  let c = fwd ? mid[0] : n - mid[1];
+  c = Math.max(0, Math.min(sq.length - 1200, c - 520));
+  document.getElementById('mutseq').value = sq.slice(c, c + 1200);
+  goMut();
+};
+
+/* ---------- inside the model ---------- */
+let insideDone = false;
+function drawInside() {
+  if (insideDone) return; insideDone = true;
+  logo('logo_donor', Qu.matrixProbs('donor'), 3, ['exon', 'intron']);
+  logo('logo_acceptor', Qu.matrixProbs('acceptor'), 20, ['intron', 'exon']);
+  logo('logo_atg', Qu.matrixProbs('atg'), -1, []);
+  logo('logo_pas', Qu.matrixProbs('pas'), -1, []);
+  codonChart();
+  histChart('ilen', Qu.intronLenHist, 20, 'intron length (bp)');
+  histChart('elen', Qu.exonLenHist, 4, 'coding exon length (bp)');
+  mixHeat();
+}
+function logo(cid, M, cut, labels) {
+  const c = document.getElementById(cid), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  const L = M.length, pad = 20, bw = (w - 10) / L, base = h - pad, hh = h - pad - 16;
+  const COL = {A: '#34d399', C: '#60a5fa', G: '#fbbf24', T: '#f87171'};
+  for (let j = 0; j < L; j++) {
+    let ic = 2;
+    for (let b = 0; b < 4; b++) { const p = M[j][b]; if (p > 0) ic += p * Math.log2(p); }
+    const order = [0, 1, 2, 3].sort((a, b) => M[j][a] - M[j][b]);
+    let y = base;
+    for (const b of order) {
+      const hgt = Math.max(0, M[j][b] * ic / 2 * hh);
+      if (hgt > 0.5) {
+        const ch = 'ACGT'[b];
+        x.save();
+        x.translate(5 + j * bw + bw / 2, y);
+        x.scale(bw / 11, hgt / 13);
+        x.fillStyle = COL[ch]; x.font = '700 14px JetBrains Mono, monospace';
+        x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+        x.fillText(ch, 0, 0);
+        x.restore();
+      }
+      y -= hgt;
+    }
+  }
+  if (cut >= 0) {
+    const px = 5 + cut * bw;
+    x.strokeStyle = '#5eead4'; x.lineWidth = 1.5; x.setLineDash([3, 3]);
+    x.beginPath(); x.moveTo(px, 4); x.lineTo(px, base + 3); x.stroke(); x.setLineDash([]);
+    x.fillStyle = '#5eead4'; x.font = '10px Inter, sans-serif';
+    x.textAlign = 'right'; x.fillText(labels[0], px - 4, 12);
+    x.textAlign = 'left'; x.fillText(labels[1], px + 4, 12);
+  }
+  x.fillStyle = '#6b7d99'; x.font = '9px JetBrains Mono, monospace'; x.textAlign = 'center';
+  for (let j = 0; j < L; j += (L > 14 ? 2 : 1))
+    x.fillText(cut >= 0 ? (j < cut ? j - cut : j - cut + 1) : j + 1, 5 + j * bw + bw / 2, h - 6);
+  x.textAlign = 'left';
+}
+function codonChart() {
+  const c = document.getElementById('codons'), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  const f = Qu.codonFreq, names = [];
+  for (const a of 'ACGT') for (const b of 'ACGT') for (const d of 'ACGT') names.push(a + b + d);
+  let mx = 0; for (let i = 0; i < 64; i++) if (f[i] > mx) mx = f[i];
+  const bw = w / 64, base = h - 26;
+  for (let i = 0; i < 64; i++) {
+    const aa = AA[names[i]];
+    x.fillStyle = aa === '*' ? '#ef4444' : (names[i] === 'ATG' ? '#22c55e' : '#38bdf8');
+    const hgt = f[i] / mx * (h - 48);
+    x.fillRect(i * bw + 1, base - hgt, bw - 2, hgt);
+    x.save(); x.translate(i * bw + bw / 2, base + 4); x.rotate(Math.PI / 2);
+    x.fillStyle = '#6b7d99'; x.font = '8px JetBrains Mono, monospace'; x.textAlign = 'left';
+    x.fillText(names[i], 0, 3); x.restore();
+  }
+  x.fillStyle = '#9aabc4'; x.font = '10px Inter, sans-serif';
+  x.fillText('frequency per codon  ·  green = ATG  ·  red = stop (only terminal stops are annotated, so these are rare)', 4, 12);
+}
+function histChart(cid, hist, binw, label) {
+  const c = document.getElementById(cid), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  let mx = 0, tot = 0;
+  for (let i = 0; i < hist.length; i++) { if (hist[i] > mx) mx = hist[i]; tot += hist[i]; }
+  const base = h - 24, bw = w / hist.length;
+  for (let i = 0; i < hist.length; i++) {
+    const hgt = Math.sqrt(hist[i] / mx) * (h - 42);
+    x.fillStyle = '#5eead4'; x.globalAlpha = .8;
+    x.fillRect(i * bw, base - hgt, Math.max(1, bw - 0.5), hgt);
+  }
+  x.globalAlpha = 1;
+  x.fillStyle = '#6b7d99'; x.font = '10px JetBrains Mono, monospace';
+  x.fillText('0', 2, h - 8);
+  x.textAlign = 'right'; x.fillText((hist.length * binw).toLocaleString(), w - 2, h - 8);
+  x.textAlign = 'left';
+  x.fillStyle = '#9aabc4'; x.font = '10px Inter, sans-serif';
+  x.fillText(label + '  (sqrt scale, ' + Math.round(tot).toLocaleString() + ' counted)', 4, 12);
+}
+function mixHeat() {
+  const c = document.getElementById('mixheat'), {x, w, h} = fit(c);
+  x.clearRect(0, 0, w, h); x.fillStyle = '#0c1118'; x.fillRect(0, 0, w, h);
+  const rows = [];
+  const want = ['IG', 'CGI', 'TANDEM', 'UTR5', 'UTR3', 'NCRNA', 'CDS0', 'CDS1', 'CDS2',
+    'ATG0', 'STOP0', 'PAS0', 'DON0_3', 'DON0_4', 'DON0_8', 'ACC0_0', 'ACC0_18', 'ACC0_22'];
+  const PR = {IG: 'intergenic', CGI: 'CpG island', TANDEM: 'tandem', UTR5: "5′UTR", UTR3: "3′UTR",
+    NCRNA: 'ncRNA', CDS0: 'codon pos 1', CDS1: 'codon pos 2', CDS2: 'codon pos 3',
+    ATG0: 'start A', STOP0: 'stop T', PAS0: 'poly(A) A1', DON0_3: 'donor +1 (G)',
+    DON0_4: 'donor +2 (T)', DON0_8: 'donor +6', ACC0_0: 'acceptor −20', ACC0_18: 'acceptor −2 (A)',
+    ACC0_22: 'acceptor +3'};
+  for (const nm of want) {
+    const sIdx = Qu.stateNames.indexOf(nm);
+    if (sIdx < 0) continue;
+    const slot = Qu.state_slot[sIdx];
+    rows.push([PR[nm] || nm, slot]);
+  }
+  const lw = 118, rh = Math.min(24, (h - 34) / rows.length), cw = (w - lw - 10) / 16;
+  x.fillStyle = '#6b7d99'; x.font = '9px Inter, sans-serif';
+  for (let conf = 0; conf < 4; conf++)
+    x.fillText('conf ' + conf, lw + conf * 4 * cw + 4, 11);
+  rows.forEach(([lab, slot], i) => {
+    x.fillStyle = '#9aabc4'; x.font = '10.5px Inter, sans-serif'; x.textAlign = 'right';
+    x.fillText(lab, lw - 8, 24 + i * rh + rh * 0.68);
+    x.textAlign = 'left';
+    for (let conf = 0; conf < 4; conf++) for (let j = 0; j < 4; j++) {
+      const v = Qu.mixWeights[(slot * 4 + conf) * 4 + j];
+      const u = Math.pow(Math.max(0, Math.min(1, v)), 0.6);
+      const cols = [[94, 234, 212], [167, 139, 250], [52, 211, 153], [107, 125, 153]][j];
+      x.fillStyle = `rgba(${cols[0]},${cols[1]},${cols[2]},${0.08 + 0.92 * u})`;
+      x.fillRect(lw + (conf * 4 + j) * cw, 20 + i * rh, cw - 1, rh - 1.5);
+    }
+  });
+}
+
+/* ---------- about table ---------- */
+document.getElementById('abttab').innerHTML = [
+  ["Held-out human bits/base (chr19\u201322)", "1.925", "1.756", "1.667", "order-2 Markov 1.932"],
+  ["Held-out mouse bits/base (chr19)", "1.922", "1.904", "1.898", "no mouse data was counted"],
+  ["BRCA1 noncoding variants (AUROC)", "0.790", "0.873", "0.873", "Evo 2 7B 0.87 \u00b7 CADD 0.875 \u00b7 GPN-MSA 0.77"],
+  ["Locating canonical splice sites (AUROC)", "0.836", "0.926", "0.926", "CADD 0.994"],
+  ["BRCA1 all 3,893 variants (AUROC)", "0.548", "0.580", "0.580", "Evo 2 7B 0.73 \u00b7 CADD 0.804"],
+  ["BRCA1 missense only (AUROC)", "0.445", "0.471", "0.471", "Evo 2 7B 0.57 \u00b7 CADD 0.738"],
+  ["Generated vs real 6-mer spectrum (JS div.)", "0.0209", "0.0083", "0.0081", "shuffled control 0.0905"]
+].map(r => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td>
+  <td class="num">${r[3]}</td>
+  <td class="num" style="color:var(--ink2)">${r[4]}</td></tr>`).join('');
+document.getElementById('abtnote').innerHTML =
+  'The pattern is consistent: Quill knows <b>where things are</b> - splice sites, reading frames, ' +
+  'gene architecture, base composition - and that knowledge survives the jump from human to mouse. ' +
+  'It does not know <b>which changes matter</b> inside a protein, which is where the large models ' +
+  'earn their size. Note how little the written 10 KB model gives up: counting 2.65 Gb of human ' +
+  'DNA buys compression on human and almost nothing on mouse.';
+
+
+/* ---------- ontology ---------- */
+(function () {
+  const Ont = window.QuillOnt;
+  if (!Ont) return;
+  const HYD = new Set('AILMFVWC'.split(''));
+  const EX = (window.QUILL_ONT_EXAMPLES || {});
+
+  function chips(host, items, onPick) {
+    document.getElementById(host).innerHTML = items
+      .map((e, i) => `<button class="mini" data-i="${i}">${e.label}</button>`).join(' ');
+    document.querySelectorAll(`#${host} button`).forEach(b =>
+      b.onclick = () => onPick(items[+b.dataset.i]));
+  }
+
+  function row(r, best) {
+    const bar = Math.max(0, Math.min(1, r.posterior));
+    return `<tr><td>${r.name.replace(/_/g, ' ')}</td>
+      <td class="num" style="color:var(--ink2)">${r.label || ''}</td>
+      <td class="num">${(100 * bar).toFixed(1)}%</td>
+      <td class="num">${r.score.toFixed(1)}</td></tr>`;
+  }
+
+  function fill(id, ranked, n) {
+    document.getElementById(id).innerHTML =
+      ranked.slice(0, n).map(r => row(r)).join('');
+  }
+
+  function scoreCoding() {
+    const arm = document.getElementById('ontarm').value;
+    const txt = document.getElementById('ontseq').value;
+    const seq = Ont.encode(txt);
+    const cods = Ont.codonsOf(seq);
+    if (cods.length < 20) {
+      document.getElementById('ontinfo').textContent = 'need at least 60 bases';
+      return;
+    }
+    const g = arm === 'k' ? Ont.go : Ont.goCounted;
+    const f = arm === 'k' ? Ont.fam : Ont.famCounted;
+    const rg = g.ranked(cods), rf = f.ranked(cods);
+    fill('onttabgo', rg, 10);
+    fill('onttabfam', rf, 7);
+    const prot = Ont.translate(Array.from(cods).filter(v => v >= 0));
+    const sigs = (window.QUILL_SIGNATURES || []).filter(r => r.go && new RegExp(r.pattern).test(prot));
+    document.getElementById('sigtab').innerHTML = sigs.length ? sigs.map(r =>
+      `<tr><td>${r.name}</td><td>${r.term} <span style="color:var(--ink2)">${r.go}</span></td>
+       <td class="num">${r.written.toFixed(2)}</td>
+       <td class="num">${r.measured == null ? 'too rare to test' : r.measured.toFixed(2) + ' (n=' + r.n + ')'}</td></tr>`).join('')
+      : '<tr><td colspan="4" style="color:var(--ink2)">none of the 67 written signatures matches</td></tr>';
+    document.getElementById('ontinfo').textContent =
+      `${cods.length} codons, ${prot.length} residues; ` +
+      `${(arm === 'k' ? g.nparam : g.nparam).toLocaleString()} + ` +
+      `${f.nparam.toLocaleString()} parameters`;
+    document.getElementById('ontnote').innerHTML =
+      `Best functional class <b>${rg[0].name.replace(/_/g, ' ')}</b> ` +
+      `(${(100 * rg[0].posterior).toFixed(0)}%), best family ` +
+      `<b>${rf[0].name.replace(/_/g, ' ')}</b> ` +
+      `(${(100 * rf[0].posterior).toFixed(0)}%). The family axis is far sharper than the ` +
+      `Gene Ontology axis, which is the paper's main negative result: broad ` +
+      `localisation classes leave much weaker marks on sequence than distinctive ` +
+      `protein architectures do.`;
+  }
+
+  function scoreNc() {
+    const seq = Ont.encode(document.getElementById('soseq').value);
+    const ex = Math.max(1, +document.getElementById('soex_n').value || 1);
+    if (seq.length < 40) {
+      document.getElementById('soinfo').textContent = 'need at least 40 bases';
+      return;
+    }
+    const r = Ont.so.ranked(seq, ex);
+    document.getElementById('sotab').innerHTML = r.map(x => row(x)).join('');
+    const f = Ont.so.features(seq, ex);
+    document.getElementById('soinfo').textContent =
+      `${seq.length} nt, GC ${(100 * f.gc).toFixed(0)}%, longest self-pairing stem ` +
+      `${(100 * f.hairpin).toFixed(0)}% of length`;
+    const boxes = (window.QUILL_ONT.so.boxes[r[0].name] || []);
+    document.getElementById('sonote').innerHTML = boxes.length
+      ? `Written boxes for <b>${r[0].name.replace(/_/g, ' ')}</b>: ` + boxes.map(
+          ([m, where, win]) => `${m.replace(/_/g, ' ')} near the ${where} ` +
+          `(${Ont.so.boxScore(seq, Ont.so.mats[m],
+             { start: 0, middle: 1, end: 2 }[where], win).toFixed(1)} bits)`).join(', ')
+        + '. A box scoring above about 3 bits is really there; in a shuffle of the same '
+        + 'bases box C averages 0.9 bits against 7.5 in a true C/D snoRNA.'
+      : `<b>${r[0].name.replace(/_/g, ' ')}</b> has no defining box written for it: `
+        + 'length, exon count and GC decide it.';
+  }
+
+  function generate() {
+    const v = document.getElementById('gencls').value;
+    const [axis, name] = v.split('|');
+    const m = axis === 'fam' ? Ont.fam : Ont.go;
+    const i = m.names.indexOf(name);
+    const n = Math.round(m.lenMean[i]);
+    const cods = m.sample(i, n);
+    const prot = Ont.translate(cods);
+    document.getElementById('genprot').innerHTML = prot.split('').map(a =>
+      HYD.has(a) ? `<span style="background:rgba(13,148,136,.22)">${a}</span>` : a).join('');
+    const runs = Ont.tmCount(prot);
+    const g = 1000 * (prot.match(/G/g) || []).length / prot.length;
+    const tg = (prot.match(/TGEKP/g) || []).length;
+    const byPhase = [0, 1, 2].map(k => {
+      const sub = prot.split('').filter((_, j) => j % 3 === k);
+      return (100 * sub.filter(a => a === 'G').length / sub.length).toFixed(0) + '%';
+    });
+    document.getElementById('gentab').innerHTML = [
+      ['residues', prot.length],
+      ['glycine per 1000', g.toFixed(0)],
+      ['glycine by codon-triplet phase', byPhase.join(' / ')],
+      ['TGEKP linkers', tg],
+      ['transmembrane-like segments found', runs],
+      ['written transmembrane expectation', m.tm[i].toFixed(2)]
+    ].map(r => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td></tr>`).join('');
+    document.getElementById('geninfo').textContent =
+      `sampled ${n} codons from the written tables`;
+  }
+
+  // examples come from held-out chromosomes, shipped with the page
+  chips('ontex', EX.coding || [], e => {
+    document.getElementById('ontseq').value = e.dna;
+    scoreCoding();
+  });
+  chips('soex', EX.noncoding || [], e => {
+    document.getElementById('soseq').value = e.dna;
+    document.getElementById('soex_n').value = e.exons || 1;
+    scoreNc();
+  });
+  document.getElementById('gencls').innerHTML =
+    Ont.fam.names.map(n => `<option value="fam|${n}">family: ${n.replace(/_/g, ' ')}</option>`)
+      .concat(Ont.go.names.map(n =>
+        `<option value="go|${n}">GO slim: ${n.replace(/_/g, ' ')}</option>`)).join('');
+  document.getElementById('ontgo').onclick = scoreCoding;
+  document.getElementById('sogo').onclick = scoreNc;
+  document.getElementById('ontarm').onchange = scoreCoding;
+  document.getElementById('gengo').onclick = generate;
+  if ((EX.coding || []).length) {
+    document.getElementById('ontseq').value = EX.coding[0].dna;
+    scoreCoding();
+  }
+  if ((EX.noncoding || []).length) {
+    document.getElementById('soseq').value = EX.noncoding[0].dna;
+    document.getElementById('soex_n').value = EX.noncoding[0].exons || 1;
+    scoreNc();
+  }
+  generate();
+})();
+
+
+/* ---------- gene function (quill-xl2-nano) ---------- */
+(function () {
+  const XL = window.QuillXL;
+  if (!XL) return;
+  const $ = id => document.getElementById(id);
+  $('fnmeta').textContent = `${XL.nterms.toLocaleString()} GO terms, ${XL.nparam.toLocaleString()} parameters`;
+  const pct = v => (100 * v).toFixed(0) + '%';
+  const row = (k, v) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`;
+  function map(d) {
+    const W = 760, H = 46, L = d.length, x = i => 10 + (W - 20) * i / L;
+    let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px">` +
+      `<rect x="10" y="20" width="${W - 20}" height="8" rx="2" fill="var(--line,#ddd)"/>`;
+    for (const [a, b] of d.long_disordered_regions) svg += `<rect x="${x(a)}" y="20" width="${x(b) - x(a)}" height="8" fill="#9ca3af"/>`;
+    if (d.signal_peptide) svg += `<rect x="${x(0)}" y="16" width="${x(d.cleavage_site) - x(0)}" height="16" rx="2" fill="#d97706"/>`;
+    for (const [a, b] of d.tm_helices) svg += `<rect x="${x(a)}" y="14" width="${Math.max(x(b) - x(a), 2)}" height="20" rx="2" fill="#0d9488"/>`;
+    svg += `<text x="10" y="44" font-size="10" fill="currentColor">1</text><text x="${W - 10}" y="44" font-size="10" text-anchor="end" fill="currentColor">${L}</text>`;
+    svg += `<text x="10" y="10" font-size="10" fill="#d97706">signal peptide</text><text x="100" y="10" font-size="10" fill="#0d9488">transmembrane helix</text><text x="220" y="10" font-size="10" fill="#6b7280">long disordered region</text></svg>`;
+    return svg;
+  }
+  function terms(id, list) {
+    $(id).innerHTML = list.length ? list.map(t => `<tr><td>${t.name}<br><span class="hint">${t.go}</span></td>` +
+      `<td class="num">${pct(t.p)}<br><span class="hint">base ${pct(t.prior)}</span></td></tr>`).join('')
+      : '<tr><td class="hint">nothing above 30%</td></tr>';
+  }
+  function run() {
+    const t0 = performance.now();
+    const r = XL.annotate($('fnseq').value);
+    if (r.error) { $('fninfo').textContent = r.error; return; }
+    const d = r.protein, n = r.rna;
+    $('fninfo').textContent = `${r.input} input; ${d.length} residues; ${(performance.now() - t0).toFixed(0)} ms`;
+    $('fnmap').innerHTML = map(d);
+    const motifs = Object.entries(d.slims).filter(([k, v]) => v && !/^phospho_|^ER_export|^SUMO|^D_box|^SH3|^TRAF|^YxxPhi|^dileucine|^14-3-3|^PP1|^caspase|^N_glyc/.test(k))
+      .map(([k, v]) => `${k.replace(/_/g, ' ')}${v > 1 ? ' ×' + v : ''}`);
+    $('fnprot').innerHTML = [
+      ['mass', d.mass_kda + ' kDa'], ['isoelectric point', d.pI], ['hydropathy (GRAVY)', d.gravy],
+      ['signal peptide', d.signal_peptide ? `yes, cleaved after ${d.cleavage_site}` : 'no'],
+      ['transmembrane helices', d.tm_helices.length + (d.topology ? ` (${d.topology.replace('_', '-terminus ')})` : '')],
+      ['mitochondrial presequence', d.mito_presequence ? 'yes' : 'no'], ['GPI anchor', d.gpi_anchor ? 'yes' : 'no'],
+      ['disordered', pct(d.disorder_fraction)], ['coiled coil', pct(d.coiled_coil_fraction)],
+      ['N-glycosylation sequons', d.slims.N_glycosylation],
+      ['targeting and binding motifs', motifs.join(', ') || 'none'],
+      ['PROSITE patterns', r.prosite.length ? r.prosite.map(p => `<span title="${p.desc}">${p.name}</span>`).join(', ') : 'none']
+    ].map(([k, v]) => row(k, v)).join('');
+    $('fnrna').innerHTML = n ? [
+      ["5′UTR / CDS / 3′UTR", `${n.utr5_len} / ${n.cds_len} / ${n.utr3_len} nt`],
+      ['upstream AUGs', n.uorfs], ['start context', n.kozak_strong ? 'strong Kozak' : 'weak'],
+      ["5′TOP tract", n.top_tract >= 4 ? 'yes' : 'no'], ["G-quadruplex in 5′UTR", n.g4_5utr ? 'yes' : 'no'],
+      ['codon adaptation (written table)', n.cai_written], ['GC3', n.gc3],
+      ['AU-rich elements in 3′UTR', n.are_count + (n.are_nonamer ? ' (incl. UUAUUUAUU)' : '')],
+      ['Pumilio / CPE elements', `${n.pre_count} / ${n.cpe_count}`], ['poly(A) signal', n.pas || 'none in last 60 nt'],
+      ['RNA-binding protein sites', Object.entries(n.rbp_3utr).filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join(', ') || 'none'],
+      ['microRNA seed matches', Object.entries(n.mirna_sites).filter(([, v]) => v).map(([k, v]) => `${k}${v > 1 ? ' ×' + v : ''}`).join(', ') || 'none']
+    ].map(([k, v]) => row(k, v)).join('') : '<tr><td class="hint">protein input: no mRNA to read</td></tr>';
+    terms('fnmf', r.go.MF); terms('fnbp', r.go.BP); terms('fncc', r.go.CC);
+    $('fnnote').innerHTML = (r.ec.length ? `Enzyme Commission: ${r.ec.map(([e, p]) => `EC ${e} (${pct(p)})`).join(', ')}. ` : '') +
+      'Percentages are the model\'s probabilities; "base" is how often the term occurs among annotated genes. ' +
+      'This is the browser-sized model, which reads no sequence similarity: on held-out chromosomes it ' +
+      'reaches molecular-function Fmax 0.539 against 0.410 for term frequency. ' +
+      'The medium model, too large for a page, reaches 0.627 against 0.410 at 4,175 terms.';
+  }
+  const ex = window.QUILL_XL_EXAMPLES || [];
+  $('fnex').innerHTML = ex.map((e, i) => `<button class="mini" data-i="${i}">${e.label}</button>`).join(' ');
+  document.querySelectorAll('#fnex button').forEach(b => b.onclick = () => { $('fnseq').value = ex[+b.dataset.i].text; run(); });
+  $('fngo').onclick = run;
+  if (ex.length) { $('fnseq').value = ex[0].text; run(); }
+})();
+
+/* ---------- go ---------- */
+/* called after the model selector changes: every panel is recomputed with the new weights */
+function refreshPanels() {
+  insideDone = false;
+  run();
+  if (document.getElementById('t-ins').classList.contains('on')) drawInside();
+}
+window.addEventListener('resize', () => {
+  if (LAST) { drawRibbon('ribbon', LAST.path, LAST.path.length); }
+  insideDone = false;
+  if (document.getElementById('t-ins').classList.contains('on')) drawInside();
+});
+run();
+window.QuillPage = { get Qu() { return Qu; }, get META() { return META; }, get CURRENT() { return CURRENT; },
+                     RIBC: RIBC, RIBN: RIBN, PRETTY: PRETTY };
+</script>
+<script src="quill-3d.js"></script>
+</body>
+</html>
