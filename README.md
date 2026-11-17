@@ -11,6 +11,8 @@ and differ only in where their weights came from. No model here takes a gradient
 
 Held out and never counted: human chromosomes 17, 19, 20, 21, 22, and mouse entirely.
 
+Model files and card on [huggingface](https://huggingface.co/baudrly/quill)
+
 ## Headline results
 
 - Held-out human: 1.925 / 1.756 / 1.668 bits per base (k / s / l).
